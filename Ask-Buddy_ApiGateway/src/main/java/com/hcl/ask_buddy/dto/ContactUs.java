@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class ContactUs {
 
+	// DTO for ContactUs 
 	private long sap_Id;
 	private String name;
 	private String query;

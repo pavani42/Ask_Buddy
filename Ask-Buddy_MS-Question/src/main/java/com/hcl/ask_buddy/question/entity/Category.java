@@ -18,6 +18,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "cat")
 public class Category {
+
+	// Category Entity Attributes
 	@Id
 	@Column(name = "cat_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

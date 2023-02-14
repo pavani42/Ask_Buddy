@@ -22,8 +22,7 @@ import com.hcl.ask_buddy.dto.Question;
 import com.hcl.ask_buddy.exception.IdNotFoundException;
 import com.hcl.ask_buddy.security.AuthenticatedUser;
 
-
-
+// Question Services - Business Logics
 @Service
 public class QuestionService {
 	
@@ -41,6 +40,7 @@ public class QuestionService {
 		return generateUrl.getBaseUrl("Question_MicroService");
 	}
 	
+	// Service for Adding Questions 
 	public String addQuestion(String category, String sub_Category, String question)
 	{
 //		if(session.getAttribute("id") == null)
@@ -57,24 +57,28 @@ public class QuestionService {
 		}
 	}
 	
+	// Service for fetch Question by ID
 	public Question getQuestionByID(long id)
 	{
 //		return restTemplate.exchange(getUrl() + "/getQuestion/" + id, HttpMethod.GET, new HttpEntity<>(setToken()), Question.class).getBody();
 		return restTemplate.exchange(getUrl() + "/getQuestion/" + id, HttpMethod.GET, new HttpEntity<>(setToken()), Question.class).getBody();
 	}
 	
+	// Service for fetching Question & Answers by Category
 	public List<QueAndAns> getByCategory(String category)
 	{
 		QueAndAns[] queAndAns =  restTemplate.exchange(getUrl() + "/SearchQuestionByCategory/" + category, HttpMethod.GET, new HttpEntity<>(setToken()),QueAndAns[].class).getBody();
 		return Arrays.asList(queAndAns); 
 	}
 	
+	// Service for fetching Question & Answers by Sub-Category
 	public List<QueAndAns> getBySubCategory(String sub_category)
 	{
 		QueAndAns[] queAndAns =  restTemplate.exchange(getUrl() + "/SearchQuestionBySubCategory/" + sub_category,HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class).getBody();
 		return Arrays.asList(queAndAns); 
 	}
 	
+	// Service for feting User posted Questions
 	@GetMapping("/GetUserQuestions")
 	public List<QueAndAns> getUserQuestions()
 	{
@@ -82,6 +86,7 @@ public class QuestionService {
 		return Arrays.asList(queAndAns);
 	}
 	
+	// Service for fetch Question with Keyword
 	@GetMapping("/SearchByKeyword")
 	public List<ResponseEntity<QueAndAns[]>> getByKeyword(String keyword)
 	{
@@ -89,25 +94,29 @@ public class QuestionService {
 		return Arrays.asList(queAndAns); 
 	}
 	
+	// Service for Deleting Question with ID
 	@GetMapping("/DeleteQuestion")
 	public void deleteQuestion(long questionId)
 	{
 		restTemplate.exchange(getUrl()+"/DeleteQuestion/" + questionId, HttpMethod.DELETE, new HttpEntity<>(setToken()), boolean.class).getBody();
 	}
 	
+	// Service for Updating Question with ID
 	@PostMapping("/updateQuestion")
 	public boolean updateQuestion(long quesId, String question)
 	{
 		return restTemplate.exchange(getUrl() + "/UpdateQuestion/" + quesId + "?question=" + question,HttpMethod.POST, new HttpEntity<>(setToken()), boolean.class).getBody();
 	}
 	
+	// Service for fetcing Latest Questions
 	@GetMapping("/getLatestQuestion")
 	public List<QueAndAns> getLatestQuestions()
 	{
 		QueAndAns[] queAndAnsList = restTemplate.exchange(getUrl() + "/GetLatestQuestions" , HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class).getBody();
 		return Arrays.asList(queAndAnsList);
 	}
-	
+
+	// Service for Token generation
 	public HttpHeaders setToken() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", "Bearer " + authenticatedUser.getToken());

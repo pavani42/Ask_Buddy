@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hcl.ask_buddy.answer.entity.*;
 
+// Answer Repository
 
 @Repository
 public interface AnswerRepo extends JpaRepository<Answers, Long>{

@@ -17,6 +17,7 @@ import lombok.ToString;
 @Entity
 public class ContactUs {
 
+	// ContactUs Entity Attributes
 	@Id
 	@NotNull
 	@Column(name = "SAP_ID")

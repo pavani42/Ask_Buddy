@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.ask_buddy.question.entity.User;
 
+// User Repository
 @Repository
 public interface UserRepo extends JpaRepository<User, Long>{
 

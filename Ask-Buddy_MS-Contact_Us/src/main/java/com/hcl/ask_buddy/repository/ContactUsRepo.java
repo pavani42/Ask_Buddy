@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.ask_buddy.entity.ContactUs;
 
+// ContactUs Repository
 @Repository
 public interface ContactUsRepo extends JpaRepository<ContactUs, Long> {
 

@@ -17,32 +17,32 @@ import com.hcl.ask_buddy.service.ContactUs_Service;
 @RequestMapping("/ContactUs")
 public class ContactUsController {
 	
+	// ContactUs API's
 	@Autowired
 	ContactUs_Service contactUsService;
 	
-	// Ctrl for add Query
-		@PostMapping("/postQuery")
-		public ContactUs addQuery(@RequestBody ContactUs addQue) {
-			return contactUsService.addQuery(addQue);
-		}
+	// Controller for add Query
+	@PostMapping("/postQuery")
+	public ContactUs addQuery(@RequestBody ContactUs addQue) {
+		return contactUsService.addQuery(addQue);
+	}
 
-		// Ctrl for get all Query
-		@GetMapping("/getAllQueries")
-		public List<ContactUs> getAllQueries() {
-			return contactUsService.getAllQueries();
-		}
+	// Controller for get all Query
+	@GetMapping("/getAllQueries")
+	public List<ContactUs> getAllQueries() {
+		return contactUsService.getAllQueries();
+	}
 
-		// Ctrl for get Query by Id
-		@GetMapping("/sapId/{sap_Id}")
-		public ContactUs searchById(@PathVariable("sap_Id") long sap_Id) {
-			return contactUsService.getBySapId(sap_Id);
-		}
+	// Controller for get Query by Id
+	@GetMapping("/sapId/{sap_Id}")
+	public ContactUs searchById(@PathVariable("sap_Id") long sap_Id) {
+		return contactUsService.getBySapId(sap_Id);
+	}
 
-		// Ctrl for Update status
-		@PostMapping("/UpdateQuery")
-		public ContactUs updatebyId(@RequestBody ContactUs cus) {
-			return contactUsService.updateQuery(cus);
-		}
+	// Controller for Update status
+	@PostMapping("/UpdateQuery")
+	public ContactUs updatebyId(@RequestBody ContactUs cus) {
+		return contactUsService.updateQuery(cus);
+	}
 	
-
 }

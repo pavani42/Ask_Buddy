@@ -9,6 +9,8 @@ import lombok.Data;
 @Entity
 @Table(name = "answers")
 public class Answers {
+
+	// Answer entity Attribues
 	@Id
 	@Column(name = "ans_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

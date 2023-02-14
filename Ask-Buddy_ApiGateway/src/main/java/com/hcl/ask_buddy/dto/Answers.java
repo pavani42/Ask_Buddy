@@ -16,6 +16,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Answers {
+
+	// DTO for the Answers 
 	@JsonIgnore 
 	private long id;
 	@JsonIgnore

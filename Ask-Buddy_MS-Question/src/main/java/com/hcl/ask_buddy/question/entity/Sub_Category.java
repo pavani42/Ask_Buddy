@@ -18,6 +18,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "sub_cat")
 public class Sub_Category {  
+	// Sub-Category entity Attributes
 	@Id
 	@Column(name = "subcat_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

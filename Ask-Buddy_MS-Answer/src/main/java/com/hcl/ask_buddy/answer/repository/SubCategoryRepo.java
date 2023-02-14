@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.ask_buddy.answer.entity.Sub_Category;
 
+// Sub-Category Repository
 @Repository
 public interface SubCategoryRepo extends JpaRepository<Sub_Category, Long>{
 

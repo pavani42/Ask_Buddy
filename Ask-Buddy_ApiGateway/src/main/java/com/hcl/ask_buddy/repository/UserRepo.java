@@ -5,10 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.ask_buddy.entity.User;
 
+// User Repository
 @Repository
 public interface UserRepo extends JpaRepository<User, Long>{
 	
 	public User getByMail(String usermail);
-
 
 }

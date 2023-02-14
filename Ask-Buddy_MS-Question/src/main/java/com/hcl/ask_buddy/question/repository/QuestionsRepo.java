@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+// Question Repository
 @Repository
 public interface QuestionsRepo extends JpaRepository<Question, Long>{
 	@Query("select quest from Question quest where quest.cat.cat_name = ?1")

@@ -23,6 +23,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+// User APIs Controller
 @RestController
 public class Rest_controller {
 	@Autowired 
@@ -44,13 +46,13 @@ public class Rest_controller {
 //	@Autowired
 //	private RequestToken requestToken;
 
-	
+	// Controller for FetchingAll  Users
 	@GetMapping("/User")
 	public List<User_entity> user_List(){
 		return user.findAll();
 	}
 	
-	
+	// Controller for Adding User
 	@PostMapping("/register")
 	public boolean check(@RequestBody User_entity users) {
 		try
@@ -67,6 +69,7 @@ public class Rest_controller {
 	
 	}
 	
+	// Controller for User Login
 	@GetMapping("/login")
 	public ResponseEntity<String> login (@RequestParam long id , @RequestParam String password) throws Exception{
 		if(user.existsById(id))
@@ -86,6 +89,7 @@ public class Rest_controller {
 		
 	}
 	
+	//  Controller for User Authentication
 	private void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -96,7 +100,7 @@ public class Rest_controller {
 		}
 	}
 
-	
+	// Controller for Deleting by ID
 	@GetMapping("/delete/{id}")
 	public boolean delete(@PathVariable long id) {
 		try

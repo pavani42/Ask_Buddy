@@ -15,6 +15,7 @@ import com.hcl.ask_buddy.dto.Answers;
 import com.hcl.ask_buddy.exception.RestTemplateErrorHandler;
 import com.hcl.ask_buddy.security.AuthenticatedUser;
 
+// Answer Servive  - Business Logics
 @Service
 public class AnswerService {
 	
@@ -24,7 +25,6 @@ public class AnswerService {
 	@Autowired
 	private AuthenticatedUser authenticatedUser;
 
-	
 	private RestTemplate restTemplate;
 	
 	@Autowired
@@ -40,11 +40,13 @@ public class AnswerService {
 		return generateUrl.getBaseUrl("Answer_MicroService");
 	}
 	
+	// Service for adding Answer
 	public Answers postAnswers(String answer, String question)
 	{
 		return restTemplate.exchange(getUrl() + "/PostAnswer/" + authenticatedUser.getUser().getSap_Id() + "?answer=" + answer + "&question=" + question, HttpMethod.GET, new HttpEntity<>(setToken()), Answers.class).getBody();
 	}
 	
+	// Service for fetch Ans by Question
 	@GetMapping("/getAnswerByQuestion")
 	public List<Answers> getAnswersByQuestion(String question) 
 	{
@@ -61,21 +63,25 @@ public class AnswerService {
 		}
 	}
 	
+	// Service for fetch ANswer by ID
 	public Answers getAnswerById(long id)
 	{
 		return restTemplate.exchange(getUrl() + "/GetAnswerById/" + id,HttpMethod.GET, new HttpEntity<>(setToken()), Answers.class).getBody();
 	}
 	
+	// Service for update Answer by ID
 	public String updateAnswer(long id, String answer)
 	{
 		return restTemplate.exchange(getUrl() + "/UpdateAnswer?id=" + id + "&answer=" + answer,HttpMethod.GET, new HttpEntity<>(setToken()), String.class).getBody();
 	}
 	
+	// Service for Delete Answer by ID
 	public String deleteAnswer(long id)
 	{
 		return restTemplate.exchange(getUrl() + "/DeleteAnswer/" + id,HttpMethod.GET, new HttpEntity<>(setToken()), String.class).getBody();
 	}
 	
+	// Service for Token
 	public HttpHeaders setToken() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", "Bearer " + authenticatedUser.getToken());

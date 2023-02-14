@@ -11,6 +11,7 @@ import com.hcl.ask_buddy.question.exception.IdNotFoundException;
 import com.hcl.ask_buddy.question.repository.*;
 import com.hcl.ask_buddy.question.security.AuthenticatedUser;
 
+// API Services for the Question
 @Service
 public class QuestionImpl implements QuestionService{
 
@@ -32,6 +33,7 @@ public class QuestionImpl implements QuestionService{
 	@Autowired
 	AuthenticatedUser authenticatedUser;
 	
+	// Service for Fetching Question by ID
 	@Override
 	public Question getQuestion(long id) {
 		try
@@ -45,6 +47,7 @@ public class QuestionImpl implements QuestionService{
 		}
 	}
 
+	// Service for searching Queston by KeyWord
 	@Override
 	public List<QueAndAns> searchQuestion(String word) {
 		List<Question> questionList = questionRepository.getQuestionByKeyword(word);
@@ -53,6 +56,7 @@ public class QuestionImpl implements QuestionService{
 		return getQuestionAndAnswerList(questionList);
 	}
 
+	//  Service for fetcing Question and Answer by Category
 	@Override
 	public List<QueAndAns> searchByCategory(String Category) {
 		List<Question> questionList = questionRepository.getByCategory(Category);
@@ -61,6 +65,7 @@ public class QuestionImpl implements QuestionService{
 		return getQuestionAndAnswerList(questionList);
 	}
 	
+	// Service for fetching Quesion and Answer by Sub-Category
 	@Override
 	public List<QueAndAns> searchBySubCategory(String subCat) {
 		List<Question> questionList = questionRepository.getBySubCategory(subCat);
@@ -69,6 +74,7 @@ public class QuestionImpl implements QuestionService{
 		return getQuestionAndAnswerList(questionList);
 	}
 	
+	// Service for Fetchin Q&A 
 	public List<QueAndAns> getQuestionAndAnswerList(List<Question> questionList)
 	{
 		List<QueAndAns> qalist = new ArrayList<QueAndAns>();
@@ -82,6 +88,7 @@ public class QuestionImpl implements QuestionService{
 		return qalist;
 	}
 
+	// Service for Adding Question
 	// This module saves the question into the question database
 	@Override
 	public Question postQuestion(long id, String cat, String subCat, String question) {
@@ -102,6 +109,7 @@ public class QuestionImpl implements QuestionService{
 			throw new IdNotFoundException("Given question is already exists");
 	}
 
+	// Service for Updatin the Question
 	@Override
 	public boolean updateQuestion(long id, String question) {
 		question = question.trim();
@@ -118,6 +126,7 @@ public class QuestionImpl implements QuestionService{
 		}
 	}
 
+	// Service for Deleting the Question with ID
 	@Override
 	public boolean deleteQuestion(long id) {
 		try
@@ -135,18 +144,18 @@ public class QuestionImpl implements QuestionService{
 		}
 	}
 
+	// Service for Fetching Latest Quesions
 	@Override
 	public List<QueAndAns> getLatestQuestion() {
 		List<Question> questionList = questionRepository.getQuestionByDate();
 		return getQuestionAndAnswerList(questionList);
 		}
 
+	// Service for Fetching User Posted Questions
 	@Override
 	public List<QueAndAns> getByUser(long userId) {
 		List<Question> questionList = questionRepository.getQuestionByUser(userRepo.findById(userId).get());
 		return getQuestionAndAnswerList(questionList);
 	}
-
-
 
 }
