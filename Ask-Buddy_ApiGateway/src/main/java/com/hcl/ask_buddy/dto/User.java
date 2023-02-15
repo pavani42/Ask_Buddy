@@ -14,6 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
+	// DTO for User
 	private long sap_Id;
 	@JsonIgnore
 	private String mail;

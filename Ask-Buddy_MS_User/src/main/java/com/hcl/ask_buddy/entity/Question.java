@@ -21,6 +21,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "questions")
 public class Question {
+
+	// Question Entity Attributes
 	@Id
 	@Column(name = "que_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,5 +44,4 @@ public class Question {
 	@OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private List<Answers> answerList;
 	
-
 }

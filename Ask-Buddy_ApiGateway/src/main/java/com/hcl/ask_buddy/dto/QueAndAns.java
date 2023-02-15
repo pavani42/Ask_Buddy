@@ -15,6 +15,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Component
 public class QueAndAns {
+
+	// DTO for Question And Answer
 	private Question question;
 	private List<Answers> AnswerList;
 	

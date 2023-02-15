@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.hcl.ask_buddy.dto.User;
 
+// User Services
 @Service
 public class UserService {
 
@@ -22,6 +23,7 @@ public class UserService {
 		return generateUrl.getBaseUrl("User_MicroService");
 	}
 
+	// Service for Adding User
 	public String register(User user)
 	{
 		if(restTemplate.postForObject(getUrl() + "/register", user, boolean.class))
@@ -30,6 +32,7 @@ public class UserService {
 			return "User Already Exists";	
 	}
 
+	// Service for User Login
 	public String login(long id, String password)
 	{
 //		if(restTemplate.getForObject(getUrl() + "/login?id=" + id + "&password=" + password, String.class) != null)
@@ -42,12 +45,11 @@ public class UserService {
 		return restTemplate.getForObject(getUrl() + "/login?id=" + id + "&password=" + password, String.class);
 	}
 
+	// Service for User Logout
 	public String logout(HttpSession session)
 	{
 		session.removeAttribute("id");
 		return "Successfully logout";
 	}
-
-
 
 }

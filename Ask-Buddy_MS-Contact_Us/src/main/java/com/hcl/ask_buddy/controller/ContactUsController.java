@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.ask_buddy.entity.ContactUs;
 import com.hcl.ask_buddy.service.ContactUsService;
 
+// Controller for ContactUS API's
 @RestController
 @RequestMapping("/contactUs")
 public class ContactUsController {
@@ -23,25 +24,25 @@ public class ContactUsController {
 	@Autowired
 	private ContactUsService conServ;
 
-	// Ctrl for add Query
+	// Controller for add Query
 	@PostMapping("/postQuery")
 	public ContactUs addQuery(@RequestBody ContactUs addQue) {
 		return conServ.addQuery(addQue);
 	}
 
-	// Ctrl for get all Query
+	// Controller for get all Query
 	@GetMapping("/getAllQueries")
 	public List<ContactUs> getAllQueries() {
 		return conServ.getAllQueries();
 	}
 
-	// Ctrl for get Query by Id
+	// Controller for get Query by Id
 	@GetMapping("/sapId/{sap_Id}")
 	public ContactUs searchById(@PathVariable("sap_Id") long sap_Id) {
 		return conServ.searchById(sap_Id);
 	}
 
-	// Ctrl for Update status
+	// Controller for Update status
 	@PostMapping("/UpdateQuery")
 	public ContactUs updatebyId(@RequestBody ContactUs cus) {
 		return conServ.updatebyId(cus);

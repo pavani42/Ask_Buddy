@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.ask_buddy.question.entity.*;
 
+// Category Repository
 @Repository
 public interface CategoryRepo extends JpaRepository<Category, Long>{
 	@Query("select category from Category category where category.cat_name = ?1")

@@ -18,6 +18,8 @@ import lombok.Setter;
 
 public class Question {
 
+	// DTO for the Question
+
 	private long id;
 	private User user;
 	private String quesDescription;

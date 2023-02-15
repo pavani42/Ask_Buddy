@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.ask_buddy.answer.entity.*;
 
+// Category Repository
 @Repository
 public interface CategoryRepo extends JpaRepository<Category, Long>{
 //	@Query("select Category")

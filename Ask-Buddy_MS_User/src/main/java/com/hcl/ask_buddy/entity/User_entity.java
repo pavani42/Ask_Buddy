@@ -21,6 +21,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "user")
 public class User_entity {
+
+	// User Entity Attributes
 	@Id
 	@Column(name = "sap_id")
 	private long sap_Id;

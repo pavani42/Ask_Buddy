@@ -21,6 +21,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "questions")
 public class Question {
+
+	// Question Entity Attributes
 	@Id
 	@Column(name = "que_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

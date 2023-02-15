@@ -13,6 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class Category {
+	
+	// DTO for the Category 
 	@JsonIgnore
 	private long id;
 	private String cat_name;
