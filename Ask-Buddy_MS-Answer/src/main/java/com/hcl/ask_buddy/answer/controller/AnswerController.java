@@ -44,7 +44,7 @@ public class AnswerController {
 		return answerService.updateAnswer(id, answer);
 	}
 	
-	// Controller for deletin answer by ID
+	// Controller for deleting answer by ID
 	@GetMapping("DeleteAnswer/{id}")
 	public String deleteAnswer(@PathVariable("id") long id)
 	{
