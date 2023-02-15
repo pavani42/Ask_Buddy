@@ -42,9 +42,6 @@ public class Rest_controller {
 	@Autowired
 	private JwtUtil jwtTokenUtil;
 	
-	
-//	@Autowired
-//	private RequestToken requestToken;
 
 	// Controller for FetchingAll  Users
 	@GetMapping("/User")
