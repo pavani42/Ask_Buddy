@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.hcl.ask_buddy.dto.User;
 import com.hcl.ask_buddy.service.UserService;
-import io.swagger.annotations.ApiParam;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
