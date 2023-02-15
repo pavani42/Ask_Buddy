@@ -24,11 +24,17 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/Login")
-	@ApiParam(name = "HttpSession", value = "session", required = false)
 	public String login(@RequestParam long id, @RequestParam String password)
 	{
 		System.out.println("coming here");
-		return userService.login(id, password);
+		try
+		{
+		  return userService.login(id, password);
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
 	}
 	
 	@PostMapping("/logout")

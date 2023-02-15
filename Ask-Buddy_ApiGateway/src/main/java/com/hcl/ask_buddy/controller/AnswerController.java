@@ -3,13 +3,12 @@ package com.hcl.ask_buddy.controller;
 
 
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestClientResponseException;
+
 import com.hcl.ask_buddy.dto.*;
 import com.hcl.ask_buddy.service.AnswerService;
 
@@ -20,9 +19,17 @@ public class AnswerController {
 	AnswerService answerService;
 	
 	@GetMapping("/PostAnswer")
-	public Answers postAnswers(@RequestParam String answer, @RequestParam String question)
+	public ResponseEntity<?> postAnswers(@RequestParam String answer, @RequestParam String question)
 	{
-		return answerService.postAnswers(answer, question);
+		try
+		{
+		return ResponseEntity.ok(answerService.postAnswers(answer, question));
+		}
+		catch(RestClientResponseException e)
+		{
+			System.out.println(e.getMessage());
+			return ResponseEntity.ok(e.getMessage());
+		}
 	}
 	
 	@GetMapping("/getAnswerByQuestion")
