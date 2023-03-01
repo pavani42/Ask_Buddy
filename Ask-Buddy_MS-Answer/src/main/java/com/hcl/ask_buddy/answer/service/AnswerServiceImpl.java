@@ -20,26 +20,25 @@ public class AnswerServiceImpl implements AnswerService{
 
 	@Autowired
 	UserRepo userRepo;
-	
+
 	@Autowired
-	AuthenticatedUser authenticatedUser;
+	AuthenticatedUser authUser;
 
 
 	@Override
-	public Answers postAnswer(long id, String question, String answerDesc) {
-		Answers answer = new Answers();
+	public Answers postAnswer(String question, String answerDesc) {
 		answerDesc = answerDesc.trim();
-		answer.setQuestion(questionRepo.getQuestionByQuestion(question));
-		answer.setDescription(answerDesc);
-		answer.setDate(LocalDateTime.now());
-		answer.setUser(authenticatedUser.getUser());
+		System.out.println(userRepo.findById(authUser.getUser().getSap_Id()).get());
+		Answers answer = Answers.builder().question(questionRepo.getQuestionByQuestion(question)).description(answerDesc)
+				.date(LocalDateTime.now()).user(userRepo.findById(authUser.getUser().getSap_Id()).get()).build();
+
 		answerRepo.save(answer);
 		return answer;
 	}
 
 	@Override
 	public List<Answers> getAnswers(String ques) {
-//		System.out.println(ques);
+		//		System.out.println(ques);
 		List<Answers> answers = answerRepo.getAnswerByQuestion(ques);
 		if(answers.size() > 0)
 			return answers;
@@ -49,7 +48,7 @@ public class AnswerServiceImpl implements AnswerService{
 
 	@Override
 	public Answers getAnswersById(long id) {
-		
+
 		return answerRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Answer Id is not found in the list"));
 
 	}
@@ -57,23 +56,24 @@ public class AnswerServiceImpl implements AnswerService{
 	@Override
 	public String updateAnswer(long id, String answer) {
 		answer = answer.trim();
-		answerRepo.updateAnswer(authenticatedUser.getUser().getSap_Id(), answer);
+		answerRepo.updateAnswer(id, answer);
 		return "Successfully Updated";	
 	}
 
 	@Override
 	public String deleteAnswer(long id) {
 		answerRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Given Id Not found"));
-		try
+		if(answerRepo.findById(id).get().getUser().getSap_Id() == authUser.getUser().getSap_Id())
 		{
-			answerRepo.deleteById(authenticatedUser.getUser().getSap_Id());
-			return "Successfully Deleted";
+		   answerRepo.deleteById(id);
+		   return "Successfully Deleted";
 		}
-		catch(Exception e)
+		else
 		{
-			throw new ResourceNotFoundException(e.getMessage());
-	    }
-		
+			return "Unauthorized User";
+		}
+
+
 	}
 
 }

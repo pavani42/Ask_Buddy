@@ -13,13 +13,18 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Sub_Category {  
 
 	// DTO for Sub_Category
 	private long id;
+	public Sub_Category(long id, String subcat_name, Category category) {
+		super();
+		this.id = id;
+		this.subcat_name = subcat_name;
+		this.category = category;
+	}
 	private String subcat_name;
 	private Category category;
 	@JsonIgnore

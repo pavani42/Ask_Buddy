@@ -3,7 +3,6 @@ package com.hcl.ask_buddy.answer.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.hcl.ask_buddy.answer.entity.*;
-import com.hcl.ask_buddy.answer.security.AuthenticatedUser;
 import com.hcl.ask_buddy.answer.service.AnswerServiceImpl;
 
 import java.util.*;
@@ -17,35 +16,35 @@ public class AnswerController {
 	
 	
 	// Controller for fetching Ans by Question
-	@GetMapping("/GetAnswersByQuestion")
+	@GetMapping("/answersByQuestion")
 	public List<Answers> getAnswersByQuestion(@RequestParam String question)
 	{
 		return answerService.getAnswers(question);
 	}
 	
 	//Controller for publishing answer
-	@GetMapping("/PostAnswer/{id}")
-	public Answers postAnswer(@PathVariable("id") long id, @RequestParam String answer, @RequestParam String question)
+	@PostMapping("/postAnswer")
+	public Answers postAnswer(@RequestParam String answer, @RequestParam String question)
 	{
-		return answerService.postAnswer(id, question, answer);
+		return answerService.postAnswer(question, answer);
 	}
 	
 	// Controller for fetching answer by ID
-	@GetMapping("/GetAnswerById/{id}")
+	@GetMapping("/answerById/{id}")
 	public Answers getAnswerById(@PathVariable("id") long id)
 	{
 		return answerService.getAnswersById(id);
 	}
 	
 	// Controller for updating answer by ID
-	@PostMapping("/UpdateAnswer")
+	@PostMapping("/updateAnswer")
 	public String updateAnswer(@RequestParam long id, @RequestParam String answer)
 	{
 		return answerService.updateAnswer(id, answer);
 	}
 	
 	// Controller for deleting answer by ID
-	@GetMapping("DeleteAnswer/{id}")
+	@DeleteMapping("/answer/{id}")
 	public String deleteAnswer(@PathVariable("id") long id)
 	{
 		return answerService.deleteAnswer(id);

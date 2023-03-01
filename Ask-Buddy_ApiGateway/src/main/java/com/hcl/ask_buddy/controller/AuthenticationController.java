@@ -15,15 +15,15 @@ public class AuthenticationController {
 	@Autowired
 	UserService userService;
 	
-	@PostMapping("/Register")
+	@PostMapping(value = "/register", consumes = {"application/json"})
 	public ResponseEntity<String> register(@RequestBody User user)
 	{
 		String msg = userService.register(user);
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
-	@PostMapping("/Login")
-	public String login(@RequestParam long id, @RequestParam String password)
+	@GetMapping("/login")
+	public ResponseEntity<String> login(@RequestParam long id, @RequestParam String password)
 	{
 		System.out.println("coming here");
 		try
@@ -32,7 +32,7 @@ public class AuthenticationController {
 		}
 		catch(Exception e)
 		{
-			return e.getMessage();
+			return ResponseEntity.ok(e.getMessage());
 		}
 	}
 	
@@ -41,4 +41,6 @@ public class AuthenticationController {
 	{
 		return userService.logout(session);
 	}
+	
+	
 }

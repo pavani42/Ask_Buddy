@@ -23,6 +23,15 @@ public class JwtUtil implements Serializable{
 	@Value("${jwt.secret}")
 	private String secret;
 
+	public JwtUtil()
+	{
+		
+	}
+	
+	public JwtUtil(String secret2) {
+		this.secret = secret2;
+	}
+
 	public String getUsernameFromToken(String token) {
 		return getClaimFromToken(token, Claims::getSubject);
 	}
@@ -57,6 +66,7 @@ public class JwtUtil implements Serializable{
 
 	public String generateToken(UserDetails userDetails) {
 		Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
+		System.out.println("comming herekjghjh");
 		claims.put("roles", userDetails.getAuthorities());
 		return doGenerateToken(claims, userDetails.getUsername());
 	}

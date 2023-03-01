@@ -2,6 +2,7 @@ package com.hcl.ask_buddy.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -24,52 +25,52 @@ public class QuestionController {
 	QuestionService questionService;
 	
 	// Controller for Adding Question
-	@GetMapping("/AddQuestion")
-	public String addQuestion(@RequestParam String category, @RequestParam String sub_Category, @RequestParam String question)
+	@PostMapping("/addQuestion")
+	public String addQuestion(@RequestParam String category, @RequestParam String sub_Category, @RequestParam String question, @RequestParam String questionDescription)
 	{
-		return questionService.addQuestion(category, sub_Category, question);
+		return questionService.addQuestion(category, sub_Category, question, questionDescription);
 	}
 	
 	// Controller for Search Question By ID
-	@GetMapping("/GetQuestionByID")
+	@GetMapping("/questionByID")
 	public Question getQuestionByID(@RequestParam long id)
 	{
 		return questionService.getQuestionByID(id);
 	}
 	
 	// Controller for Search by Category
-	@GetMapping("/SearchByCategory")
+	@GetMapping("/searchByCategory")
 	public List<QueAndAns> getByCategory(@RequestParam String category)
 	{
 		return questionService.getByCategory(category);
 	}
 	
 	// Controller for Search by Sub-Category
-	@GetMapping("/SearchBySubCategory")
+	@GetMapping("/searchBySubCategory")
 	public List<QueAndAns> getBySubCategory(@RequestParam String sub_category)
 	{
 		return questionService.getBySubCategory(sub_category);
 	}
 	
 	// Controller for fetching User Questions
-	@GetMapping("/GetUserQuestions")
+	@GetMapping("/userQuestions")
 	public List<QueAndAns> getUserQuestions()
 	{
 		return questionService.getUserQuestions();
 	}
 	
 	// Controller for Searcin by Keyword
-	@GetMapping("/SearchByKeyword")
-	public List<ResponseEntity<QueAndAns[]>> getByKeyword(@RequestParam String keyword)
+	@GetMapping("/searchByKeyword")
+	public List<QueAndAns> getByKeyword(@RequestParam String keyword)
 	{
 		return questionService.getByKeyword(keyword); 
 	}
 	
 	// Controller for Deleting the Question
-	@GetMapping("/DeleteQuestion")
-	public void deleteQuestion(@RequestParam long questionId)
+	@DeleteMapping("/question")
+	public ResponseEntity<String> deleteQuestion(@RequestParam long questionId)
 	{
-		questionService.deleteQuestion(questionId);
+		return new ResponseEntity<String>(questionService.deleteQuestion(questionId), HttpStatus.OK);
 	}
 	
 	// Controller for the Updating the Questions
@@ -80,7 +81,7 @@ public class QuestionController {
 	}
 	
 	// Controller for fetching Latest Questions
-	@GetMapping("/getLatestQuestion")
+	@GetMapping("/latestQuestion")
 	public List<QueAndAns> getLatestQuestions()
 	{
 		return questionService.getLatestQuestions();

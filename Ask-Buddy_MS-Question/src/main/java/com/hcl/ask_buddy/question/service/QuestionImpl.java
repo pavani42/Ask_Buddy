@@ -11,6 +11,7 @@ import com.hcl.ask_buddy.question.exception.IdNotFoundException;
 import com.hcl.ask_buddy.question.repository.*;
 import com.hcl.ask_buddy.question.security.AuthenticatedUser;
 
+
 // API Services for the Question
 @Service
 public class QuestionImpl implements QuestionService{
@@ -31,7 +32,8 @@ public class QuestionImpl implements QuestionService{
 	UserRepo userRepo;
 	
 	@Autowired
-	AuthenticatedUser authenticatedUser;
+	AuthenticatedUser authUser;
+	
 	
 	// Service for Fetching Question by ID
 	@Override
@@ -51,8 +53,8 @@ public class QuestionImpl implements QuestionService{
 	@Override
 	public List<QueAndAns> searchQuestion(String word) {
 		List<Question> questionList = questionRepository.getQuestionByKeyword(word);
-		if(questionList.size() == 0)
-			throw new IdNotFoundException("No Question found with the given word");
+//		if(questionList.size() == 0)
+//			throw new IdNotFoundException("No Question found with the given word");
 		return getQuestionAndAnswerList(questionList);
 	}
 
@@ -91,17 +93,18 @@ public class QuestionImpl implements QuestionService{
 	// Service for Adding Question
 	// This module saves the question into the question database
 	@Override
-	public Question postQuestion(long id, String cat, String subCat, String question) {
-//		User user = userRepo.findById((long) id).get();
+	public Question postQuestion(String cat, String subCat, String question, String questionDescription) {
+		
 		question = question.trim();
 		if(questionRepository.getQuestionByQuestion(question) == null)
 		{
 			Question question1 = new Question();
 			question1.setDate(LocalDateTime.now());
-			question1.setUser(authenticatedUser.getUser());
+			question1.setUser(userRepo.findById(authUser.getUser().getSap_Id()).get());
 			question1.setCat(catRepo.getCategory(cat));
 			question1.setSubCat(subCatRepo.getCategory(subCat));
-			question1.setQuesDescription(question);
+			question1.setQuestion(question);
+			question1.setQuesDescription(questionDescription);
 			questionRepository.save(question1);
 			return question1;
 		}
@@ -109,39 +112,28 @@ public class QuestionImpl implements QuestionService{
 			throw new IdNotFoundException("Given question is already exists");
 	}
 
-	// Service for Updatin the Question
+	// Service for Updating the Question
 	@Override
 	public boolean updateQuestion(long id, String question) {
 		question = question.trim();
 		if(questionRepository.existsById(id) != true)
-			return false;
-		try
-		{
-		    questionRepository.updateQuestion(authenticatedUser.getUser().getSap_Id(), question);
-		    return true;
-		}
-		catch(NoSuchElementException exception)
-		{
 			throw new IdNotFoundException("Given id is not found");
-		}
+		int n = questionRepository.updateQuestion(id, question, authUser.getUser());
+		if(n == 0)
+			return false;
+		return true;
+
 	}
 
 	// Service for Deleting the Question with ID
 	@Override
-	public boolean deleteQuestion(long id) {
-		try
-		{
-		    questionRepository.deleteById(id);
-		    return true;
-		}
-		catch(NoSuchElementException exception)
-		{
-			throw new IdNotFoundException("Given id is not found");
-		}
-		catch(EmptyResultDataAccessException e)
-		{
-			throw new IdNotFoundException("No Element found with the given id");
-		}
+	public String deleteQuestion(long id) {
+		if(questionRepository.existsById(id) != true)
+			throw new IdNotFoundException("Given id is not found");;
+
+		questionRepository.deleteById(id);
+		return "SuccessFully Deleted";
+
 	}
 
 	// Service for Fetching Latest Quesions
@@ -153,8 +145,8 @@ public class QuestionImpl implements QuestionService{
 
 	// Service for Fetching User Posted Questions
 	@Override
-	public List<QueAndAns> getByUser(long userId) {
-		List<Question> questionList = questionRepository.getQuestionByUser(userRepo.findById(userId).get());
+	public List<QueAndAns> getByUser() {
+		List<Question> questionList = questionRepository.getQuestionByUser(userRepo.findById(authUser.getUser().getSap_Id()).get());
 		return getQuestionAndAnswerList(questionList);
 	}
 

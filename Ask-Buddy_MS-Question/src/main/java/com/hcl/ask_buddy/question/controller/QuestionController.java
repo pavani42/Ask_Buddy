@@ -1,16 +1,12 @@
 package com.hcl.ask_buddy.question.controller;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,66 +21,66 @@ public class QuestionController {
 	QuestionImpl ques;
 	
 	// Controller for postQuestion
-	@GetMapping("/postQuestion/{id}")
-	public Question postQuestion(@PathVariable("id") long id, @RequestParam String category, @RequestParam String sub_Category,@RequestParam String question)
+	@PostMapping("/postQuestion")
+	public Question postQuestion(@RequestParam String category, @RequestParam String sub_Category,@RequestParam String question, @RequestParam String questionDescription)
 	{
-		return ques.postQuestion(id, category, sub_Category, question);
+		return ques.postQuestion(category, sub_Category, question, questionDescription);
 	}
 	
-	// COntroller for fetching Quesdtion with ID
-	@GetMapping("/getQuestion/{ques_id}")
+	// COntroller for fetching Question with ID
+	@GetMapping("/question/{ques_id}")
 	public Question getQuestion(@PathVariable("ques_id") long ques_id)
 	{
 		return ques.getQuestion(ques_id);
 	}
 	
 	// Controller for fetching Question by Category
-	@GetMapping("/SearchQuestionByCategory/{category}")
+	@GetMapping("/searchQuestionByCategory/{category}")
 	public List<QueAndAns> searchQuestionByCat(@PathVariable("category") String category)
 	{
 		return ques.searchByCategory(category);
 	}
 	
 	// Controller for fetching Question by Sub-Category
-	@GetMapping("/SearchQuestionBySubCategory/{subcat}")
+	@GetMapping("/searchQuestionBySubCategory/{subcat}")
 	public List<QueAndAns> searchQuestionBySubcat(@PathVariable("subcat") String subCat)
 	{
 		return ques.searchBySubCategory(subCat);
 	}
 	
 	// Controller for Fetching Question with KeyWord
-	@GetMapping("/SearchQuestionByKeyword/{keyword}")
+	@GetMapping("/searchQuestionByKeyword/{keyword}")
 	public List<QueAndAns> searchByKeyword(@PathVariable("keyword") String Keyword)
 	{
 		return ques.searchQuestion(Keyword);
 	}
 	
 	// Controller for Deleting Question by ID
-	@DeleteMapping("/DeleteQuestion/{id}")
-	public boolean deleteQuestion(@PathVariable("id") long id)
+	@DeleteMapping("/question/{id}")
+	public String deleteQuestion(@PathVariable("id") long id)
 	{
 		return ques.deleteQuestion(id);
 	}
 	
 	// COntroller for Updating Question by ID
-	@PostMapping("/UpdateQuestion/{id}")
+	@PostMapping("/updateQuestion/{id}")
 	public boolean UpdateQuestion(@PathVariable("id") long id, @RequestParam String question)
 	{
 		return ques.updateQuestion(id, question);
 	}
 	
 	// Controller for Fetching Latest Questions from DB
-	@GetMapping("/GetLatestQuestions")
+	@GetMapping("/latestQuestions")
 	public List<QueAndAns> getLatestQuestion()
 	{
 		return ques.getLatestQuestion();
 	}
 	
 	// Controller for User Posted by User
-	@GetMapping("/getQuestionByUser/{userId}")
-	public List<QueAndAns> getQuestionByUser(@PathVariable("userId") long userId)
+	@GetMapping("/questionByUser")
+	public List<QueAndAns> getQuestionByUser()
 	{
-		return ques.getByUser(userId);
+		return ques.getByUser();
 	}
 
 }

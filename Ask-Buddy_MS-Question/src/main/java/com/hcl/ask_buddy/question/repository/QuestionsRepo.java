@@ -21,18 +21,18 @@ public interface QuestionsRepo extends JpaRepository<Question, Long>{
 	@Query("select quest from Question quest where quest.subCat.subcat_name = ?1")
 	public List<Question> getBySubCategory(String cat);
 	
-	@Query("select quest from Question quest where quest.quesDescription LIKE CONCAT('%',:keyword,'%')")
+	@Query("select quest from Question quest where quest.quesDescription LIKE CONCAT('%',:keyword,'%') or quest.question LIKE CONCAT('%',:keyword,'%')")
 	public List<Question> getQuestionByKeyword(@Param("keyword") String keyword);
 	
 	@Modifying
 	@Transactional
-	@Query("update Question ques set ques.quesDescription = :question where ques.id = :id")
-	public int updateQuestion(@Param("id") long id, @Param("question")String question);
+	@Query("update Question ques set ques.question = :question where ques.id = :id and ques.user = :user")
+	public int updateQuestion(@Param("id") long id, @Param("question")String question, @Param("user")User user);
 	
 	@Query("select ques from Question ques order by ques.date desc")
 	public List<Question> getQuestionByDate();
 	
-	@Query("select ques from Question ques where ques.quesDescription = ?1")
+	@Query("select ques from Question ques where ques.question = ?1")
 	public Question getQuestionByQuestion(String quest);
 	
 	@Query("select ques from Question ques where ques.user = ?1")

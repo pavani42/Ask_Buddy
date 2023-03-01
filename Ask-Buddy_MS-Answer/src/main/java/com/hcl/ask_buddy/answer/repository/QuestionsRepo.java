@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 // Question Repository
 @Repository
 public interface QuestionsRepo extends JpaRepository<Question, Long>{
-	@Query("select ques from Question ques where ques.quesDescription = ?1")
+	@Query("select ques from Question ques where ques.question = ?1")
 	public Question getQuestionByQuestion(String quest);
 }

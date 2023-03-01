@@ -17,6 +17,13 @@ public class User {
 
 	// DTO for User
 	private long sap_Id;
+	public User(long sap_Id, String mail, String username, String password) {
+		super();
+		this.sap_Id = sap_Id;
+		this.mail = mail;
+		this.username = username;
+		this.password = password;
+	}
 	@JsonIgnore
 	private String mail;
 	private String username;

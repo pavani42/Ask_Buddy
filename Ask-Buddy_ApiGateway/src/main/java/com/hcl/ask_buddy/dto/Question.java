@@ -5,15 +5,12 @@ import java.util.List;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Question {
@@ -21,8 +18,19 @@ public class Question {
 	// DTO for the Question
 
 	private long id;
+	public Question(long id, User user2, String quesDescription, LocalDateTime date, Category cat, Sub_Category subCat) 
+	{
+		super();
+		this.id = id;
+		this.user = user2;
+		this.quesDescription = quesDescription;
+		this.date = date;
+		this.cat = cat;
+		this.subCat = subCat;
+	}
 	private User user;
 	private String quesDescription;
+	private String question;
 	private LocalDateTime date;
 	private Category cat;
 	private Sub_Category subCat;

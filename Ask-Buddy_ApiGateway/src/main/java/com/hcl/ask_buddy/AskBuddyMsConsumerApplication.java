@@ -24,6 +24,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @EnableDiscoveryClient
+
 public class AskBuddyMsConsumerApplication {
 
 	public static void main(String[] args) {
@@ -48,7 +49,7 @@ public class AskBuddyMsConsumerApplication {
 	    	      "Api Documentation",
 	    	      "1.0",
 	    	      "urn:tos",
-	    	      new springfox.documentation.service.Contact("Pavani", "localhost.com", "sindiripavani01@gmail.com"),
+	    	      new springfox.documentation.service.Contact("AskBuddy", "localhost.com", ""),
 	    	      "Apache 2.0",
 	    	      "http://www.apache.org/licenses/LICENSE-2.0",
 	    	      new ArrayList<>());

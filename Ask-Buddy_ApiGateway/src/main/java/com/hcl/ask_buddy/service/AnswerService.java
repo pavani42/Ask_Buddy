@@ -12,75 +12,80 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import com.hcl.ask_buddy.dto.Answers;
+import com.hcl.ask_buddy.exception.IdNotFoundException;
 import com.hcl.ask_buddy.exception.RestTemplateErrorHandler;
 import com.hcl.ask_buddy.security.AuthenticatedUser;
 
 // Answer Servive  - Business Logics
 @Service
-public class AnswerService {
-	
+public class AnswerService{
+
 	@Autowired
 	private GenarateUrl generateUrl;
-	
+
 	@Autowired
 	private AuthenticatedUser authenticatedUser;
 
 	private RestTemplate restTemplate;
-	
+
+
+
 	@Autowired
 	public AnswerService(RestTemplateBuilder restTemplateBuilder)
 	{
-	    this.restTemplate = restTemplateBuilder
-          .errorHandler(new RestTemplateErrorHandler())
-          .build();
+		this.restTemplate = restTemplateBuilder
+				.errorHandler(new RestTemplateErrorHandler())
+				.build();
+	}
+
+	public AnswerService() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getUrl()
 	{
 		return generateUrl.getBaseUrl("Answer_MicroService");
 	}
-	
+
 	// Service for adding Answer
 	public Answers postAnswers(String answer, String question)
 	{
-		return restTemplate.exchange(getUrl() + "/PostAnswer/" + authenticatedUser.getUser().getSap_Id() + "?answer=" + answer + "&question=" + question, HttpMethod.GET, new HttpEntity<>(setToken()), Answers.class).getBody();
+		return restTemplate.exchange(getUrl() + "/postAnswer?answer=" + answer + "&question=" + question, HttpMethod.POST, new HttpEntity<>(setToken()), Answers.class).getBody();
 	}
-	
+
 	// Service for fetch Ans by Question
-	@GetMapping("/getAnswerByQuestion")
 	public List<Answers> getAnswersByQuestion(String question) 
 	{
+		System.out.println(question);
 		try
 		{
-			System.out.println(question);
-			Answers[] queAndAns = restTemplate.exchange(getUrl() + "/GetAnswersByQuestion?question=" + question,HttpMethod.GET, new HttpEntity<>(setToken()), Answers[].class).getBody();
+			Answers[] queAndAns = restTemplate.exchange(getUrl() + "/answersByQuestion?question=" + question,HttpMethod.GET, new HttpEntity<>(setToken()), Answers[].class).getBody();
 			return Arrays.asList(queAndAns);
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getMessage());
-			return null;
+			throw new IdNotFoundException(e.toString());
 		}
 	}
-	
+
 	// Service for fetch ANswer by ID
 	public Answers getAnswerById(long id)
 	{
-		return restTemplate.exchange(getUrl() + "/GetAnswerById/" + id,HttpMethod.GET, new HttpEntity<>(setToken()), Answers.class).getBody();
+		return restTemplate.exchange(getUrl() + "/answerById/" + id,HttpMethod.GET, new HttpEntity<>(setToken()), Answers.class).getBody();
 	}
-	
+
 	// Service for update Answer by ID
 	public String updateAnswer(long id, String answer)
 	{
-		return restTemplate.exchange(getUrl() + "/UpdateAnswer?id=" + id + "&answer=" + answer,HttpMethod.GET, new HttpEntity<>(setToken()), String.class).getBody();
+		return restTemplate.exchange(getUrl() + "/updateAnswer?id=" + id + "&answer=" + answer,HttpMethod.POST, new HttpEntity<>(setToken()), String.class).getBody();
 	}
-	
+
 	// Service for Delete Answer by ID
 	public String deleteAnswer(long id)
 	{
-		return restTemplate.exchange(getUrl() + "/DeleteAnswer/" + id,HttpMethod.GET, new HttpEntity<>(setToken()), String.class).getBody();
+		return restTemplate.exchange(getUrl() + "/answer/" + id, HttpMethod.DELETE, new HttpEntity<>(setToken()), String.class).getBody();
 	}
-	
+
 	// Service for Token
 	public HttpHeaders setToken() {
 		HttpHeaders headers = new HttpHeaders();
@@ -88,5 +93,7 @@ public class AnswerService {
 		headers.add(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
 		return headers;
 	}
-	
+
+
+
 }

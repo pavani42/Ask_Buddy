@@ -2,7 +2,7 @@ package com.hcl.ask_buddy.question.security;
 
 import org.springframework.stereotype.Component;
 
-import com.hcl.ask_buddy.question.entity.*;
+import com.hcl.ask_buddy.question.entity.User;
 
 import lombok.Data;
 

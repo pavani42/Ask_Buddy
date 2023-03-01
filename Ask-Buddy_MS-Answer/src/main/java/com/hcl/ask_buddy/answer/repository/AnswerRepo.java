@@ -15,7 +15,7 @@ import com.hcl.ask_buddy.answer.entity.*;
 
 @Repository
 public interface AnswerRepo extends JpaRepository<Answers, Long>{
-	@Query("select answer from Answers answer where answer.question.quesDescription = ?1")
+	@Query("select answer from Answers answer where answer.question.question = ?1")
 	public List<Answers> getAnswerByQuestion(String question);
 	
 	@Query("select answer from Answers answer where answer.question = ?1")

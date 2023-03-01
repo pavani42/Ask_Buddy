@@ -43,7 +43,7 @@ public class ContactUsController {
 	}
 
 	// Controller for Update status
-	@PostMapping("/UpdateQuery")
+	@PostMapping("/updateQuery")
 	public ContactUs updatebyId(@RequestBody ContactUs cus) {
 		return conServ.updatebyId(cus);
 	}

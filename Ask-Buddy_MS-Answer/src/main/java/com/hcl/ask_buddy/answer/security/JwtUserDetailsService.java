@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 import com.hcl.ask_buddy.answer.entity.User;
 import com.hcl.ask_buddy.answer.repository.UserRepo;
 
-
-
-
 @Service
 public class JwtUserDetailsService implements UserDetailsService{
 	@Autowired
@@ -24,7 +21,6 @@ public class JwtUserDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepo.getByMail(username);
-//		System.out.println(user.ge);
 		if(user == null)
 			throw new UsernameNotFoundException("User not found with Username" + username);
 		return new org.springframework.security.core.userdetails.User(user.getMail(), user.getPassword(), new ArrayList<>());

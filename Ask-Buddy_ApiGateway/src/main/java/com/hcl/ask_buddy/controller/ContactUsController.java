@@ -14,7 +14,7 @@ import com.hcl.ask_buddy.dto.ContactUs;
 import com.hcl.ask_buddy.service.ContactUs_Service;
 
 @RestController
-@RequestMapping("/ContactUs")
+@RequestMapping("/contactUs")
 public class ContactUsController {
 	
 	// ContactUs API's
@@ -40,7 +40,7 @@ public class ContactUsController {
 	}
 
 	// Controller for Update status
-	@PostMapping("/UpdateQuery")
+	@PostMapping("/updateQuery")
 	public ContactUs updatebyId(@RequestBody ContactUs cus) {
 		return contactUsService.updateQuery(cus);
 	}

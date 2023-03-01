@@ -3,9 +3,24 @@ package com.hcl.ask_buddy.answer.entity;
 
 import java.time.LocalDateTime;
 import javax.persistence.*;
-import lombok.Data;
 
-@Data
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
 @Entity
 @Table(name = "answers")
 public class Answers {

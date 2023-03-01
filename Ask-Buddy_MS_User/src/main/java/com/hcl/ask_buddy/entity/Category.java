@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "cat")
 public class Category {
 
-	// Category Entity Attributes
+	// Category entity Attributes
 	@Id
 	@Column(name = "cat_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

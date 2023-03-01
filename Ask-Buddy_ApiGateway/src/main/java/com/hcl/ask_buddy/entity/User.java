@@ -29,6 +29,13 @@ public class User {
 	private long sap_Id;
 	@Column(name = "user_mail")
 	private String mail;
+	public User(long sap_Id, String mail, String username, String password) {
+		super();
+		this.sap_Id = sap_Id;
+		this.mail = mail;
+		this.username = username;
+		this.password = password;
+	}
 	@Column(name = "user_name")
 	private String username;
 	@Column(name = "password")

@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +17,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "questions")
 public class Question {
@@ -29,6 +30,8 @@ public class Question {
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "sap_id")
 	private User user;
+	@Column(name = "question")
+	private String question;
 	@Column(name = "que_description")
 	private String quesDescription;
 	@Column(name = "que_date")

@@ -1,12 +1,15 @@
 package com.hcl.ask_buddy.entity;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 
+import java.time.LocalDateTime;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,16 +19,17 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString
 @Entity
 @Table(name = "answers")
 public class Answers {
 
-	// Answer Entity Attributes
+	// Answer entity Attribues
 	@Id
 	@Column(name = "ans_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private double id;
+	private long id;
 	@ManyToOne
 	@JoinColumn(name = "que_id", referencedColumnName = "que_id")
 	private Question question;

@@ -39,7 +39,7 @@ public class ContactUs_Service {
 	// Services for updating Query
 	public ContactUs updateQuery(ContactUs contactUs)
 	{
-		return restTemplate.postForObject(getUrl() + "/contactUs/UpdateQuery", contactUs, ContactUs.class);
+		return restTemplate.postForObject(getUrl() + "/contactUs/updateQuery", contactUs, ContactUs.class);
 	}
 	
 	// Service for fetching SAP-ID
@@ -47,5 +47,5 @@ public class ContactUs_Service {
 	{
 		return restTemplate.getForObject(getUrl() + "/contactUs/sapId/" + sap_Id, ContactUs.class);
 	}
-
+	
 }

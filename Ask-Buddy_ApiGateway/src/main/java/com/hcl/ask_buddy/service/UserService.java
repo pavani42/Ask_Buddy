@@ -3,6 +3,7 @@ package com.hcl.ask_buddy.service;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,18 +34,11 @@ public class UserService {
 	}
 
 	// Service for User Login
-	public String login(long id, String password)
+	public ResponseEntity<String> login(long id, String password)
 	{
-//		if(restTemplate.getForObject(getUrl() + "/login?id=" + id + "&password=" + password, String.class) != null)
-//		{
-////			session.setAttribute("id", id);
-//			return "login Successfully";
-//		}
-//		else
-//			return "Invalid Login Details";
-		return restTemplate.getForObject(getUrl() + "/login?id=" + id + "&password=" + password, String.class);
-	}
-
+		ResponseEntity<String> result = restTemplate.getForEntity(getUrl() + "/login?id=" + id + "&password=" + password, String.class);
+		return result;
+	}  
 	// Service for User Logout
 	public String logout(HttpSession session)
 	{

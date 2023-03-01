@@ -5,6 +5,7 @@ package com.hcl.ask_buddy.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 
 @Configuration
@@ -51,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers( "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**", "/Register", "/Login", "/ContactUs/**")
+		http.csrf().disable().authorizeRequests().antMatchers( "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**", "/register", "/login", "/ContactUs/**", "/hystrix/**")
 		.permitAll().anyRequest().authenticated().and().exceptionHandling()
 		.authenticationEntryPoint(jwtAuthEntryPoint)
 		.and()
@@ -60,8 +62,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		
 		}
-	
-
-	
-
 }
