@@ -7,21 +7,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.hcl.ask_buddy.dto.User;
 import com.hcl.ask_buddy.service.UserService;
+import io.swagger.annotations.ApiParam;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class AuthenticationController {
 	
 	@Autowired
 	UserService userService;
 	
-	@PostMapping(value = "/register", consumes = {"application/json"})
+	// Controller for User Registration
+	@PostMapping("/Register")
 	public ResponseEntity<String> register(@RequestBody User user)
 	{
 		String msg = userService.register(user);
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
+	// Controller for the User Login
 	@GetMapping("/login")
 	public ResponseEntity<String> login(@RequestParam long id, @RequestParam String password)
 	{
@@ -36,6 +39,7 @@ public class AuthenticationController {
 		}
 	}
 	
+	// Controller for the User Logout
 	@PostMapping("/logout")
 	public String logout(HttpSession session)
 	{
