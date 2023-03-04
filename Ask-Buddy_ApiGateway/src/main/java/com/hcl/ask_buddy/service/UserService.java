@@ -27,6 +27,7 @@ public class UserService {
 	// Service for Adding User
 	public String register(User user)
 	{
+		
 		if(restTemplate.postForObject(getUrl() + "/register", user, boolean.class))
 			return "Successfully Registered";
 		else

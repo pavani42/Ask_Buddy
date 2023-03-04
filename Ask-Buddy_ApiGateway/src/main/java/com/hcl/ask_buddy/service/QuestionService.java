@@ -107,7 +107,7 @@ public class QuestionService {
 	@GetMapping("/getLatestQuestion")
 	public List<QueAndAns> getLatestQuestions()
 	{
-		QueAndAns[] queAndAnsList = restTemplate.exchange(getUrl() + "/latestQuestions" , HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class).getBody();
+		QueAndAns[] queAndAnsList = restTemplate.getForObject(getUrl() + "/latestQuestions" , QueAndAns[].class);
 		return Arrays.asList(queAndAnsList);
 	}
 

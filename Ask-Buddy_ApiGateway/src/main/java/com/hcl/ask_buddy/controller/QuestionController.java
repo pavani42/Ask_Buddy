@@ -12,6 +12,7 @@ import com.hcl.ask_buddy.dto.Question;
 import com.hcl.ask_buddy.service.QuestionService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class QuestionController {
 	
 	// Question API's

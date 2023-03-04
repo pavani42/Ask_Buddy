@@ -10,7 +10,7 @@ import com.hcl.ask_buddy.service.UserService;
 import io.swagger.annotations.ApiParam;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthenticationController {
 	
 	@Autowired

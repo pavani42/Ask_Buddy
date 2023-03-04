@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers( "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**")
+		http.csrf().disable().authorizeRequests().antMatchers( "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**", "/latestQuestions")
 		.permitAll().anyRequest().authenticated().and().exceptionHandling()
 		.authenticationEntryPoint(jwtAuthEntryPoint)
 		.and() 

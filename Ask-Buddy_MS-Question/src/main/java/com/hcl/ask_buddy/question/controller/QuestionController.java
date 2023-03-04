@@ -3,6 +3,7 @@ package com.hcl.ask_buddy.question.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.hcl.ask_buddy.question.service.QuestionImpl;
 
 // Controller for Question API's
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class QuestionController {
 	@Autowired
 	QuestionImpl ques;
@@ -73,6 +75,7 @@ public class QuestionController {
 	@GetMapping("/latestQuestions")
 	public List<QueAndAns> getLatestQuestion()
 	{
+		System.out.println("comming latest questions");
 		return ques.getLatestQuestion();
 	}
 	

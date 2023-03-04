@@ -64,7 +64,7 @@ public class UserService {
 			authenticate(userData.getMail(), password);
 			final UserDetails userDetails = userDetailsService.loadUserByUsername(userData.getMail());
 			final String token = jwtTokenUtil.generateToken(userDetails);
-//		    System.out.println(token);
+		    System.out.println(token);
 			return token;
 		}
 		else
