@@ -1,0 +1,64 @@
+.join_us {
+    /* background: linear-gradient(90deg, rgb(101, 31, 205) 125%, rgba(60,145,255,1) 50%); */
+      /* url("../assets/all-images/drive.jpg"); */    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 80px 0px;
+  }
+  .join_us button {
+    background: #fff;
+    color: #000d6b;
+    font-weight: 600;
+  }
+  .join_us-title {
+    font-size: 2.3rem;
+    color: #fff;
+    line-height: 65px;
+  }
+  .join_us-title1 {
+    font-size: 1.2rem;
+    color: #fff;
+    line-height: 65px;
+  }
+  .join-us-section-img{
+    height:9cm;
+  }
+  @media only screen and (max-width: 992px) {
+    /* .join_us-title {
+      font-size: 1.5rem;
+      line-height: 3rem;
+    }
+    .join_us-title1 {
+        font-size: 0.8rem;
+        line-height: 3rem;
+      } */
+      .join-us-section-img{
+        height:7cm;
+      }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .join_us {
+      padding: 50px 0px;
+    }
+    .join_us-title {
+      font-size: 1.3rem;
+      line-height: 2.5rem;
+    }
+    .join_us-title1 {
+        font-size: 1rem;
+        line-height: 2.5rem;
+      }
+    .join_us-btn {
+      font-size: 0.8rem !important;
+    }
+    
+  }
+  @media only screen and (max-width: 576px) {
+    .join_us-img {
+      display: none;
+    }
+    .join_us {
+      text-align: center;
+    }
+  }
