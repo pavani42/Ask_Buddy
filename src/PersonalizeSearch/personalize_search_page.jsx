@@ -26,17 +26,16 @@ const Main = () => {
 
                 // console.log(formData)
             })
-            if(formData.length === 0)
-               {
-                setNoRecordsDisplay('');
-                 
-              }
+        // if(formData.length == 0)
+        //    {
+        //     setNoRecordsDisplay('');
+        //   }
 
-            else
-            {
-            setNoRecordsDisplay('display-none');
-            }
-        // console.log(formData)
+        // else
+        // {
+        // setNoRecordsDisplay('display-none');
+        // }
+        // console.log(noRecordsDisplay);
     }
     useEffect(onPuttingInput, []);
     console.log(formData)
@@ -50,6 +49,18 @@ const Main = () => {
     // {
     //     setNoRecordsDisplay('');
     // }
+
+    // const noRecordsFunction = () => {
+
+    //     if (formData.length != 0) setNoRecordsDisplay('display-none')
+
+    //     else setNoRecordsDisplay('');
+
+    // }
+
+    // useEffect(noRecordsFunction, []);
+
+    console.log(noRecordsDisplay)
 
     return (
 
@@ -107,18 +118,20 @@ const Main = () => {
 
                     <div className="ques-ans-content-1">
 
+                        {formData.length === 0 ?(
+                            <h1 style={{ textAlign: 'center', color: 'rgb(180 180 180)', marginTop: '100px' }} className={noRecordsDisplay}>No Records Found!!</h1>
+                        ):
 
-
-                        {
-                            formData.map((val) => {
+                        
+                            (formData.map((val) => {
                                 return (
                                     <Card A={val.question.question} ></Card>
 
                                 )
-                            })
+                            }))
                         }
 
-                        <h1 style={{ textAlign: 'center', color: 'rgb(180 180 180)', marginTop: '100px' }} className = {noRecordsDisplay}>No Records Found!!</h1>
+                        
 
                     </div>
 

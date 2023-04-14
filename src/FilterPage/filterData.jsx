@@ -32,9 +32,6 @@ const Main = () => {
     useEffect(onPuttingInput, [])
     return (
 
-
-
-
         <>
 
             <div
