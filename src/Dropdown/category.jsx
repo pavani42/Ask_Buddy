@@ -183,7 +183,7 @@ const Main = (prop) => {
 
         > 
 
-          category 
+         {prop.header} 
 
         </button> 
 

@@ -104,6 +104,7 @@ import axios from 'axios';
 const Main = (prop) => { 
   const [formData, setFormData] = useState([{category: {id: 1, cat_name: 'Backend'}, id: 1, subcat_name: "Java"}]);
   const [temp , setTemp] = useState(localStorage.getItem('filteredItem'));
+  const [subCatDropDownTitle, setSubCatDropDownTitle] = useState("subcategory");
   console.log(prop.array);
   console.log(prop.css);
   console.log(formData);
@@ -130,6 +131,7 @@ const Main = (prop) => {
 
   const optionClicked2 = (val) =>{
     console.log(val.target.innerText);
+    setSubCatDropDownTitle(val.target.innerText);
     localStorage.setItem('subcategory', val.target.innerText);
   }
 
@@ -187,7 +189,7 @@ const Main = (prop) => {
 
         > 
 
-          Sub category 
+         {subCatDropDownTitle} 
 
         </button> 
 

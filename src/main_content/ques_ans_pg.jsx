@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Card from '../Ques_ans_card/Card.jsx';
 import React, { useEffect, useContext } from "react";
 import fetchData from '../FetchingDataFromApi/context.jsx'
-import Category from '../Dropdown/category.jsx'; 
+import Category from '../Dropdown/category.jsx';
 import SubCategory from '../Dropdown/subCategory.jsx';
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,27 +17,28 @@ const Main = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [filter, setFilter] = useState('display-none');
   const [css, setCss] = useState('display-none');
+  const [catDropDownTitle, setCatDropDownTitle] = useState("category");
   // const [data,setData]=useState([]);
-  const data = useContext(fetchData);           
-  const selectChange = (e) => {                                     
-    setSelectedOption(e.target.value); 
-    setFormData({ ...formData, Category: e.target.value });  
+  const data = useContext(fetchData);
+  const selectChange = (e) => {
+    setSelectedOption(e.target.value);
+    setFormData({ ...formData, Category: e.target.value });
   }
-  
-  const filterApplied = () =>{
-    window.location.href="/filtered-search"
+
+  const filterApplied = () => {
+    window.location.href = "/filtered-search"
   }
   const [array, setArray] = useState([]);
   const changeCategorySubcategory = (val) => {
-      // console.log(val.target.innerText);
-      localStorage.setItem('category', val.target.innerText);
-
-      axios.get('http://localhost:8083/getSubCategoryList/' + val.target.innerText)
+    // console.log(val.target.innerText);
+    localStorage.setItem('category', val.target.innerText);
+    setCatDropDownTitle(val.target.innerText);
+    axios.get('http://localhost:8083/getSubCategoryList/' + val.target.innerText)
       .then(response => {
         const dataArray = response.data;
-         console.log(response);
+        console.log(response);
         //  setData(dataArray); 
-         console.log(dataArray)
+        console.log(dataArray)
         setFormData1(dataArray)
       });
   }
@@ -55,12 +56,24 @@ const Main = () => {
   //   });
   // };     
   // useEffect(fetchAPI ,[]);  console.log(data); 
+
+  // const changeDetectCatSubcat = (val) => {
+
+  //   console.log(val.target.innerText);
+
+  //   // localStorage.setItem('category',val.target.innerText)
+
+  //   // setCss("");
+
+  //   setCatDropDownTitle(val.target.innerText);
+
+  // };
   const submitHandle = async (event) => {
-    event.preventDefault(); 
-    if (localStorage.getItem('token') == null) {           
+    event.preventDefault();
+    if (localStorage.getItem('token') == null) {
       window.alert("Please login to post the question!");
       // window.location.href = '/login';
-    }                                                   
+    }
     // else 
     const user = JSON.parse(localStorage.getItem('token'));
     console.log('Bearer ' + user);
@@ -86,8 +99,7 @@ const Main = () => {
         alert("Please Login");
       }, 300);
     }
-    else if(response.status == 401)
-    {
+    else if (response.status == 401) {
       alert("time out");
     }
 
@@ -123,10 +135,10 @@ const Main = () => {
                   <option className="dropdown-item" value="other">Other</option>
                 </select> */}
                 <div style={{ display: "flex" }}>
-                 <Category functionChangeDetect = {changeCategorySubcategory}/>
-                 <SubCategory array = {formData1} css = {css}/>
-                 </div>
-                 {/* <div style={{ display: "flex" }}>
+                  <Category functionChangeDetect={changeCategorySubcategory} />
+                  <SubCategory array={formData1} css={css} />
+                </div>
+                {/* <div style={{ display: "flex" }}>
 
 <Category />
 
@@ -160,14 +172,14 @@ const Main = () => {
               <h1 style={{ margin: "40px 10px 20px 0px", color: 'black' }}>
                 Top Questions</h1>
               {/* <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" className="" href="#" style={{ backgroundColor: "rgb(60 145 255)", width: "120px", padding: "17px 10px 10px 10px", color: "white", height: "60px", margin: "auto 10px auto 0", borderRadius: "5px", textDecoration: "none" }}>Ask Question</a> */}
-              <div style={{ display: "flex", marginTop : '40px'}}>
+              <div style={{ display: "flex", marginTop: '40px' }}>
                 {/* <Category/>
                 <SubCategory/> */}
                 <button className="btn btn-secondary" style={{ marginRight: "10px", border: "none", backgroundColor: "#e3ebf7", color: "rgb(95 30 190)", height: "40px", borderRadius: "5px", }} onClick={filterClick}
                 >
-                  <FontAwesomeIcon icon={faFilter} /> 
+                  <FontAwesomeIcon icon={faFilter} />
 
-                </button>  
+                </button>
                 <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" href="#" style={{ backgroundColor: "rgb(60 145 255)", width: "120px", padding: "12px 10px 10px 10px", color: "white", height: "40px", borderRadius: "5px", textDecoration: "none", }}>
                   Ask Question
                 </a>
@@ -192,9 +204,9 @@ const Main = () => {
 
             <div style={{ display: "flex" }}>
 
-              <Category functionChangeDetect = {changeCategorySubcategory}/>
+              <Category functionChangeDetect={changeCategorySubcategory} header = {catDropDownTitle}/>
 
-              <SubCategory array = {formData1} css = {css}/>
+              <SubCategory array={formData1} css={css} />
 
             </div>
 
@@ -208,7 +220,7 @@ const Main = () => {
                 class="btn btn-primary"
 
 
-                onClick = {filterApplied}
+                onClick={filterApplied}
 
                 style={{
 

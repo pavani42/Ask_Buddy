@@ -55,6 +55,7 @@ const Main = () => {
       }
       else {
         setTemp1("alert-display");
+        sessionStorage.setItem("token", JSON.stringify(response.data))
         localStorage.setItem("token", JSON.stringify(response.data));
         setToken(response.data);
         // console.log(localStorage.getItem('token'));
@@ -64,6 +65,8 @@ const Main = () => {
       console.error(error);
     }
   };
+  console.log(localStorage.getItem("token"))
+  console.log(sessionStorage.getItem("token"))
   return (
     <>
       <div className={temp1}>

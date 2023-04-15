@@ -11,60 +11,84 @@ const Main = () => {
   //////////////////////////FOR FETCHING & STORING API IN ARRAY////////////////////////////////// 
   // const data = useContext(fetchData);
   const [formData, setFormData] = useState({});
+  // const [b, setB] = useState([])
   // console.log(data);
+  const [a, setA] = useState({
+   
+      question: {
+
+        question: "",
+
+        questionDescription: ''
+
+      },
+
+      
+
+        answerList: [{
+          description: ''
+        },]
+  });
   //////////////////////////FOR FETCHING & STORING API IN ARRAY////////////////////////////////// 
   const { slug } = useParams();
   console.log(slug)
   const data = useContext(fetchData);
   console.log(data);
-  const a = data.data.find((item) => item.question.question === slug);
+  // const a = data.data.find((item) => item.question.question === slug);
   // console.log(a.answerList[0])
   // console.log(a.question.question)
   useEffect(() => {
     console.log("HIHII");
   }, [a]);
+
+  useEffect(() => {
+    if ((data.data.find((item) => item.question.question === slug)) !== undefined) {
+      setA(data.data.find((item) => item.question.question === slug));
+    }
+  }, [data]);
   const user = JSON.parse(localStorage.getItem('token'));
   const submitHandle = async (event) => {
     event.preventDefault();
-    if(localStorage.getItem('token') == null)
-    {
+    if (localStorage.getItem('token') == null) {
       window.alert("Please login to post the answer!");
       // window.location.href = '/login';
     }
     // const response = await axios.post('http://localhost:9090/postAnswer?answer=kjd&question=kdm', formData);
-    else{
-    try{
-      // console.log(formData.Detailed_Answer + a.question.question)
-    // answer = encodeURIComponent(formData.Detailed_Answer);
-    const response = await axios('http://localhost:8084/postAnswer?answer=' + encodeURIComponent(formData.Detailed_Answer) +'&question=' + encodeURIComponent(a.question.question), {
-        method: "post",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + user,
-          mode: "no-cors",
-        },
-       
-      });
-    console.log(response);
-    if(response.data.message == "Please Login")
-       window.alert("Please login")
-    if (response.status == 200) {
-      setTimeout(function () {
-        document.getElementById("modalCloseButton").click();
-        alert("Answer posted successfully !!")
-      }, 300);
+    else {
+      try {
+        // console.log(formData.Detailed_Answer + a.question.question)
+        // answer = encodeURIComponent(formData.Detailed_Answer);
+        const response = await axios('http://localhost:8084/postAnswer?answer=' + encodeURIComponent(formData.Detailed_Answer) + '&question=' + encodeURIComponent(a.question.question), {
+          method: "post",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + user,
+            mode: "no-cors",
+          },
+
+        });
+        console.log(response);
+        if (response.data.message == "Please Login")
+          window.alert("Please login")
+        if (response.status == 200) {
+          setTimeout(function () {
+            document.getElementById("modalCloseButton").click();
+            alert("Answer posted successfully !!")
+          }, 300);
+        }
+      }
+      catch (error) {
+        window.alert(error.message)
+      }
     }
   }
-catch(error)
-{
-  window.alert(error.message)
-}
-  }
-}
+
+  console.log(a.question.question)
+  console.log(a.answerList.description)
   return (
     <>
-      <div className="detailed-div-1" style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '80px' , minHeight: 'calc(100vh - 107px)'}}>
+      <div className="detailed-div-1" style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '80px', minHeight: 'calc(100vh - 107px)' }}>
         <div className="detailed-div-2" style={{}}>
           <div className="detailed-div-3">
             <div className="detailed-div-3-content" style={{ display: 'flex' }}>
@@ -76,16 +100,16 @@ catch(error)
               </div>
               <div className="detailed-div-4-ques-bar">
                 <h2 style={{ color: 'black' }}>{a.question.question}</h2>
-              
-                  {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis alias animi voluptatem similique aspernatur voluptatum unde, minima laborum, perferendis, tenetur vitae reprehenderit esse aperiam rerum dolor rem commodi ipsa temporibus!
+
+                {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis alias animi voluptatem similique aspernatur voluptatum unde, minima laborum, perferendis, tenetur vitae reprehenderit esse aperiam rerum dolor rem commodi ipsa temporibus!
                 Voluptatibus nihil corrupti nemo dicta aspernatur quidem architecto cumque maiores perferendis, quae excepturi officiis ea vero consectetur aperiam quisquam molestias iste qui reiciendis ullam tempora, ipsa natus. Consectetur, accusamus architecto?
                 Dolores tempora odit, possimus rerum voluptatum repellat aliquid omnis quia fugiat quas voluptas, voluptate repudiandae! Esse nostrum ea commodi laboriosam sit voluptates architecto expedita. Cupiditate consectetur dolor voluptatum nobis molestias.
                 Temporibus odio aut minima voluptate illum facere hic excepturi dolor repellendus. Facere atque asperiores tempora quam laboriosam maiores dolorum aliquam, velit similique qui ab? Doloremque nulla sapiente accusantium nisi quo. */}
-               <div>{a.question.quesDescription}</div> 
+                {/* <div>{a.question.quesDescription}</div> */}
                 <a data-toggle="modal" data-target="#exampleModal" className='replyButtonDQAP'>
                   <i className="fa fa-reply" aria-hidden="true"></i>
                   Reply</a>
-                <hr style = {{width : '100%'}}/>          
+                <hr style={{ width: '100%' }} />
               </div>              </div>
             <div className="detailed-div-6-like-dislike" style={{ display: 'flex' }}>
               <div className="detailed-div-5-like-dislike" style={{ marginRight: '25px' }}>
@@ -94,21 +118,21 @@ catch(error)
                 <p style={{ fontSize: '25px', margin: '0' }}>10</p>
                 <p style={{ fontSize: '35px', margin: '0', color: 'grey' }}>&#9660; </p>
               </div>
-              <hr/>
+              <hr />
               {/* <div></div> */}
-              
+
               {/* <AnswerCard Answer={a.answerList[0].description} /> */}
               <div>
-              <h4 style={{color:'black'}}>Answer</h4>
-              {a.answerList.map((val) => {
-                return(
-                  <><hr/>
-                  <AnswerCard Answer={val.description} /> 
-                  </>
-                  
-                )
-                
-              })}
+                <h4 style={{ color: 'black' }}>Answer</h4>
+                {a.answerList.map((val) => {
+                  return (
+                    <><hr />
+                      <AnswerCard Answer={val.description} />
+                    </>
+
+                  )
+
+                })}
               </div>
             </div>
           </div>
