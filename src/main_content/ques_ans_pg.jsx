@@ -24,7 +24,6 @@ const Main = () => {
     setSelectedOption(e.target.value);
     setFormData({ ...formData, Category: e.target.value });
   }
-
   const filterApplied = () => {
     window.location.href = "/filtered-search"
   }
@@ -56,17 +55,11 @@ const Main = () => {
   //   });
   // };     
   // useEffect(fetchAPI ,[]);  console.log(data); 
-
   // const changeDetectCatSubcat = (val) => {
-
   //   console.log(val.target.innerText);
-
   //   // localStorage.setItem('category',val.target.innerText)
-
   //   // setCss("");
-
   //   setCatDropDownTitle(val.target.innerText);
-
   // };
   const submitHandle = async (event) => {
     event.preventDefault();
@@ -102,7 +95,6 @@ const Main = () => {
     else if (response.status == 401) {
       alert("time out");
     }
-
     // else if(response.status)
   }
   const filterClick = () => {
@@ -139,13 +131,9 @@ const Main = () => {
                   <SubCategory array={formData1} css={css} />
                 </div>
                 {/* <div style={{ display: "flex" }}>
-
 <Category />
-
 <SubCategory />
-
 </div> */}
-
                 {/* </div>                 */}
                 <div className="form-group">
                   <label for="question-asked" className="col-form-label" style={{ color: 'black' }}>Title</label>
@@ -178,7 +166,6 @@ const Main = () => {
                 <button className="btn btn-secondary" style={{ marginRight: "10px", border: "none", backgroundColor: "#e3ebf7", color: "rgb(95 30 190)", height: "40px", borderRadius: "5px", }} onClick={filterClick}
                 >
                   <FontAwesomeIcon icon={faFilter} />
-
                 </button>
                 <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" href="#" style={{ backgroundColor: "rgb(60 145 255)", width: "120px", padding: "12px 10px 10px 10px", color: "white", height: "40px", borderRadius: "5px", textDecoration: "none", }}>
                   Ask Question
@@ -187,61 +174,34 @@ const Main = () => {
             </div>
           </div>
           <div
-
             style={{
-
               height: "120px",
-
               backgroundColor: "rgb(242 242 243)",
-
               margin: "5px",
-
             }}
-
             className={filter}
-
           >
-
             <div style={{ display: "flex" }}>
-
               <Category functionChangeDetect={changeCategorySubcategory} header = {catDropDownTitle}/>
-
               <SubCategory array={formData1} css={css} />
-
             </div>
 
 
-
-
             <div>
-
               <Button
-
                 class="btn btn-primary"
 
-
                 onClick={filterApplied}
-
                 style={{
-
                   backgroundColor: "rgb(60 145 255)",
-
                   width: "120px",
-
                   padding: "12px 10px 10px 10px",
-
                   color: "white",
-
                   height: "40px",
-
                   borderRadius: "5px",
-
                   textDecoration: "none",
-
                   margin: "10px",
-
                 }}
-
               >
                 Apply Filter
               </Button>

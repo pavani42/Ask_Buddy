@@ -16,15 +16,10 @@ const Main = () => {
   const [a, setA] = useState({
    
       question: {
-
         question: "",
-
         questionDescription: ''
-
       },
-
       
-
         answerList: [{
           description: ''
         },]
@@ -40,7 +35,6 @@ const Main = () => {
   useEffect(() => {
     console.log("HIHII");
   }, [a]);
-
   useEffect(() => {
     if ((data.data.find((item) => item.question.question === slug)) !== undefined) {
       setA(data.data.find((item) => item.question.question === slug));
@@ -66,7 +60,6 @@ const Main = () => {
             "Authorization": "Bearer " + user,
             mode: "no-cors",
           },
-
         });
         console.log(response);
         if (response.data.message == "Please Login")
@@ -83,7 +76,6 @@ const Main = () => {
       }
     }
   }
-
   console.log(a.question.question)
   console.log(a.answerList.description)
   return (
@@ -100,7 +92,6 @@ const Main = () => {
               </div>
               <div className="detailed-div-4-ques-bar">
                 <h2 style={{ color: 'black' }}>{a.question.question}</h2>
-
                 {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis alias animi voluptatem similique aspernatur voluptatum unde, minima laborum, perferendis, tenetur vitae reprehenderit esse aperiam rerum dolor rem commodi ipsa temporibus!
                 Voluptatibus nihil corrupti nemo dicta aspernatur quidem architecto cumque maiores perferendis, quae excepturi officiis ea vero consectetur aperiam quisquam molestias iste qui reiciendis ullam tempora, ipsa natus. Consectetur, accusamus architecto?
                 Dolores tempora odit, possimus rerum voluptatum repellat aliquid omnis quia fugiat quas voluptas, voluptate repudiandae! Esse nostrum ea commodi laboriosam sit voluptates architecto expedita. Cupiditate consectetur dolor voluptatum nobis molestias.
@@ -120,7 +111,6 @@ const Main = () => {
               </div>
               <hr />
               {/* <div></div> */}
-
               {/* <AnswerCard Answer={a.answerList[0].description} /> */}
               <div>
                 <h4 style={{ color: 'black' }}>Answer</h4>
@@ -129,9 +119,7 @@ const Main = () => {
                     <><hr />
                       <AnswerCard Answer={val.description} />
                     </>
-
                   )
-
                 })}
               </div>
             </div>
@@ -164,10 +152,8 @@ const Main = () => {
           </div>
         </div>
       </form>
-
     </>
   );
-
 
 }
 export default Main;
