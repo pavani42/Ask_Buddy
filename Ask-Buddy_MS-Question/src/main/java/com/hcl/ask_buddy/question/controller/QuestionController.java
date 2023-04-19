@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,8 @@ import com.hcl.ask_buddy.question.service.QuestionImpl;
 
 // Controller for Question API's
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/questions")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class QuestionController {
 	@Autowired
 	QuestionImpl ques;

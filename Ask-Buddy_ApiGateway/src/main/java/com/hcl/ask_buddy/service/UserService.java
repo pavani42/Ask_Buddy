@@ -32,7 +32,7 @@ public class UserService {
 	public String register(User user)
 	{
 		
-		if(restTemplate.postForObject(getUrl() + "/register", user, boolean.class))
+		if(restTemplate.postForObject(getUrl() + "/api/users/register", user, boolean.class))
 			return "Successfully Registered";
 		else
 			return "User Already Exists";	
@@ -41,7 +41,7 @@ public class UserService {
 	// Service for User Login
 	public ResponseEntity<String> login(long id, String password)
 	{
-		ResponseEntity<String> result = restTemplate.getForEntity(getUrl() + "/login?id=" + id + "&password=" + password, String.class);
+		ResponseEntity<String> result = restTemplate.getForEntity(getUrl() + "/api/users/login?id=" + id + "&password=" + password, String.class);
 		return result;
 	}  
 	// Service for User Logout
@@ -52,7 +52,7 @@ public class UserService {
 	}
 
 	public String updatePassword(String mail, long sap_id, String password) {
-		String msg = restTemplate.exchange(getUrl() + "/updatePassword?mail=" + mail + "&password=" + password + "&sap_id=" +sap_id , HttpMethod.PUT, new HttpEntity<>(null), String.class).getBody();
+		String msg = restTemplate.exchange(getUrl() + "/api/users/updatePassword?mail=" + mail + "&password=" + password + "&sap_id=" +sap_id , HttpMethod.PUT, new HttpEntity<>(null), String.class).getBody();
 		return msg;
 	}
 

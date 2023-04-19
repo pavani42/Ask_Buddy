@@ -45,7 +45,7 @@ public class QuestionService {
 	public String addQuestion(String category, String sub_Category, String question, String questionDescription)
 	{
 //		Question quest = restTemplate.postForObject(getUrl() + "/postQuestion/" + authenticatedUser.getUser().getSap_Id() + "?category=" + category + "&sub_Category=" + sub_Category + "&question=" + question + "&questionDescription=" + questionDescription ,HttpMethod.POST, Question.class);
-		Question quest = restTemplate.exchange(getUrl() + "/postQuestion?category=" + category + "&sub_Category=" + sub_Category + "&question=" + question + "&questionDescription=" + questionDescription, HttpMethod.POST, new HttpEntity<>(setToken()), Question.class).getBody();
+		Question quest = restTemplate.exchange(getUrl() + "/api/questions/postQuestion?category=" + category + "&sub_Category=" + sub_Category + "&question=" + question + "&questionDescription=" + questionDescription, HttpMethod.POST, new HttpEntity<>(setToken()), Question.class).getBody();
 		System.out.println(quest);
 		if(quest.getQuestion() != null)
 			return "Question Posted Successfully";
@@ -56,20 +56,20 @@ public class QuestionService {
 	// Service for fetch Question by ID
 	public Question getQuestionByID(long id)
 	{
-		return restTemplate.exchange(getUrl() + "/question/" + id, HttpMethod.GET, new HttpEntity<>(setToken()), Question.class).getBody();
+		return restTemplate.exchange(getUrl() + "/api/questions/question/" + id, HttpMethod.GET, new HttpEntity<>(setToken()), Question.class).getBody();
 	}
 	
 	// Service for fetching Question & Answers by Category
 	public List<QueAndAns> getByCategory(String category)
 	{
-		QueAndAns[] queAndAns =  restTemplate.exchange(getUrl() + "/searchQuestionByCategory/" + category, HttpMethod.GET, new HttpEntity<>(setToken()),QueAndAns[].class).getBody();
+		QueAndAns[] queAndAns =  restTemplate.exchange(getUrl() + "/api/questions/searchQuestionByCategory/" + category, HttpMethod.GET, new HttpEntity<>(setToken()),QueAndAns[].class).getBody();
 		return Arrays.asList(queAndAns); 
 	}
 	
 	// Service for fetching Question & Answers by Sub-Category
 	public List<QueAndAns> getBySubCategory(String sub_category)
 	{
-		QueAndAns[] queAndAns =  restTemplate.exchange(getUrl() + "/searchQuestionBySubCategory/" + sub_category,HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class).getBody();
+		QueAndAns[] queAndAns =  restTemplate.exchange(getUrl() + "/api/questions/searchQuestionBySubCategory/" + sub_category,HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class).getBody();
 		return Arrays.asList(queAndAns); 
 	}
 	
@@ -77,7 +77,7 @@ public class QuestionService {
 	@GetMapping("/GetUserQuestions")
 	public List<QueAndAns> getUserQuestions()
 	{
-		QueAndAns[] queAndAns = restTemplate.exchange(getUrl()+ "/questionByUser",HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class).getBody();
+		QueAndAns[] queAndAns = restTemplate.exchange(getUrl()+ "/api/questions/questionByUser",HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class).getBody();
 		return Arrays.asList(queAndAns);
 	}
 	
@@ -85,7 +85,7 @@ public class QuestionService {
 	@GetMapping("/SearchByKeyword")
 	public List<QueAndAns> getByKeyword(String keyword)
 	{
-		ResponseEntity<QueAndAns[]> queAndAns =  restTemplate.exchange(getUrl() + "/searchQuestionByKeyword/" + keyword,HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class);
+		ResponseEntity<QueAndAns[]> queAndAns =  restTemplate.exchange(getUrl() + "/api/questions/searchQuestionByKeyword/" + keyword,HttpMethod.GET, new HttpEntity<>(setToken()), QueAndAns[].class);
 		return Arrays.asList(queAndAns.getBody()); 
 	}
 	
@@ -93,21 +93,21 @@ public class QuestionService {
 	@GetMapping("/DeleteQuestion")
 	public String deleteQuestion(long questionId)
 	{
-		return restTemplate.exchange(getUrl()+"/question/" + questionId, HttpMethod.DELETE, new HttpEntity<>(setToken()), String.class).getBody();
+		return restTemplate.exchange(getUrl()+"/api/questions/question/" + questionId, HttpMethod.DELETE, new HttpEntity<>(setToken()), String.class).getBody();
 	}
 	
 	// Service for Updating Question with ID
 	@PostMapping("/updateQuestion")
 	public boolean updateQuestion(long quesId, String question)
 	{
-		return restTemplate.exchange(getUrl() + "/updateQuestion/" + quesId + "?question=" + question,HttpMethod.POST, new HttpEntity<>(setToken()), boolean.class).getBody();
+		return restTemplate.exchange(getUrl() + "/api/questions/updateQuestion/" + quesId + "?question=" + question,HttpMethod.POST, new HttpEntity<>(setToken()), boolean.class).getBody();
 	}
 	
 	// Service for fetcing Latest Questions
 	@GetMapping("/getLatestQuestion")
 	public List<QueAndAns> getLatestQuestions()
 	{
-		QueAndAns[] queAndAnsList = restTemplate.getForObject(getUrl() + "/latestQuestions" , QueAndAns[].class);
+		QueAndAns[] queAndAnsList = restTemplate.getForObject(getUrl() + "/api/questions/latestQuestions" , QueAndAns[].class);
 		return Arrays.asList(queAndAnsList);
 	}
 

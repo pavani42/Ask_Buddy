@@ -9,7 +9,8 @@ import java.util.*;
 
 // Answer Controller
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/answers")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class AnswerController {
 	
 	@Autowired

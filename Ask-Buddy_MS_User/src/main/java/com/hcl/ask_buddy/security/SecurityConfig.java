@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers( "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**", "/register","/user", "/login", "/updatePassword", "/generateOtp", "/verifyOtp")
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers( "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**", "/api/users/register","/api/users/user", "/api/users/login", "/api/users/updatePassword", "/api/users/generateOtp", "/api/users/verifyOtp")
 		.permitAll().anyRequest().authenticated().and().exceptionHandling()
 		.authenticationEntryPoint(jwtAuthEntryPoint)
 		.and()

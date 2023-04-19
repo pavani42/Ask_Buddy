@@ -51,11 +51,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers( "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**", "/latestQuestions", "/searchQuestionByKeyword/**", "/getCategoryList", "/getSubCategoryList/**", "/getQuestionsByCategory")
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers( "/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**", "/api/questions/latestQuestions", "/api/questions/searchQuestionByKeyword/**", "/api/questions/getCategoryList", "/api/questions/getSubCategoryList/**", "/api/questions/getQuestionsByCategory")
 		.permitAll().anyRequest().authenticated().and().exceptionHandling()
 		.authenticationEntryPoint(jwtAuthEntryPoint)
 		.and() 
-		.sessionManagement()
+		.sessionManagement() 
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		

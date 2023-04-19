@@ -50,7 +50,7 @@ public class AnswerService{
 	// Service for adding Answer
 	public Answers postAnswers(String answer, String question)
 	{
-		return restTemplate.exchange(getUrl() + "/postAnswer?answer=" + answer + "&question=" + question, HttpMethod.POST, new HttpEntity<>(setToken()), Answers.class).getBody();
+		return restTemplate.exchange(getUrl() + "/api/answers/postAnswer?answer=" + answer + "&question=" + question, HttpMethod.POST, new HttpEntity<>(setToken()), Answers.class).getBody();
 	}
 
 	// Service for fetch Ans by Question
@@ -59,7 +59,7 @@ public class AnswerService{
 		System.out.println(question);
 		try
 		{
-			Answers[] queAndAns = restTemplate.exchange(getUrl() + "/answersByQuestion?question=" + question,HttpMethod.GET, new HttpEntity<>(setToken()), Answers[].class).getBody();
+			Answers[] queAndAns = restTemplate.exchange(getUrl() + "/api/answers/answersByQuestion?question=" + question,HttpMethod.GET, new HttpEntity<>(setToken()), Answers[].class).getBody();
 			return Arrays.asList(queAndAns);
 		}
 		catch(Exception e)
@@ -71,19 +71,19 @@ public class AnswerService{
 	// Service for fetch ANswer by ID
 	public Answers getAnswerById(long id)
 	{
-		return restTemplate.exchange(getUrl() + "/answerById/" + id,HttpMethod.GET, new HttpEntity<>(setToken()), Answers.class).getBody();
+		return restTemplate.exchange(getUrl() + "/api/answers/answerById/" + id,HttpMethod.GET, new HttpEntity<>(setToken()), Answers.class).getBody();
 	}
 
 	// Service for update Answer by ID
 	public String updateAnswer(long id, String answer)
 	{
-		return restTemplate.exchange(getUrl() + "/updateAnswer?id=" + id + "&answer=" + answer,HttpMethod.POST, new HttpEntity<>(setToken()), String.class).getBody();
+		return restTemplate.exchange(getUrl() + "/api/answers/updateAnswer?id=" + id + "&answer=" + answer,HttpMethod.POST, new HttpEntity<>(setToken()), String.class).getBody();
 	}
 
 	// Service for Delete Answer by ID
 	public String deleteAnswer(long id)
 	{
-		return restTemplate.exchange(getUrl() + "/answer/" + id, HttpMethod.DELETE, new HttpEntity<>(setToken()), String.class).getBody();
+		return restTemplate.exchange(getUrl() + "/api/answers/answer/" + id, HttpMethod.DELETE, new HttpEntity<>(setToken()), String.class).getBody();
 	}
 
 	// Service for Token
@@ -96,7 +96,7 @@ public class AnswerService{
 	}
 
 	public List<Answers> getUserAnswers() {
-		Answers[] answerList = restTemplate.exchange(getUrl() + "/userAnswers", HttpMethod.GET, new HttpEntity<>(setToken()), Answers[].class).getBody();
+		Answers[] answerList = restTemplate.exchange(getUrl() + "/api/answers/userAnswers", HttpMethod.GET, new HttpEntity<>(setToken()), Answers[].class).getBody();
 		return Arrays.asList(answerList);
 	}
 
