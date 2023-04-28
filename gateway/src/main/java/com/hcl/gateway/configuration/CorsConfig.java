@@ -38,5 +38,10 @@ public class CorsConfig {
         return new CorsWebFilter(source);
     }
     
+//    @Bean
+//    public HystrixGatewayFilterFactory hystrixGatewayFilterFactory() {
+//        return new HystrixGatewayFilterFactory();
+//    }
+    
 }
 
