@@ -25,14 +25,14 @@ const Main = () => {
       //   "https://httpbin.org/anything",
       //   formData
       // );
-      const response = await axios("http://localhost:9090/login?id=" + formData.SapId + "&password=" + formData.Password, {
+      const response = await axios("http://localhost:9191/api/users/login?id=" + formData.SapId + "&password=" + formData.Password, {
         method: "get",
         headers: {
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
           mode: "no-cors",
         },
         data: formData,
+      
       });
                          
 

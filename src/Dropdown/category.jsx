@@ -6,7 +6,7 @@ const Main = (prop) => {
   console.log(localStorage.getItem('filteredItem'));
   const onPuttingInput = (p) => {
     // console.log(p.target.value);
-    axios.get('http://localhost:8083/getCategoryList')
+    axios.get('http://localhost:9191/api/questions/getCategoryList')
       .then(response => {
         const dataArray = response.data;
         //  console.log(response);

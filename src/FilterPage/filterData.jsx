@@ -16,7 +16,7 @@ const Main = () => {
     const [formData, setFormData] = useState([]);
     const onPuttingInput = (p) => {
         // console.log(p.target.value);
-        axios.get('http://localhost:8083/getQuestionsByCategory?cat='+ category +'&subCat=' + sub_category)
+        axios.get('http://localhost:9191/api/questions/getQuestionsByCategory?cat='+ category +'&subCat=' + sub_category, { credentials: 'include' })
           .then(response => {
             const dataArray = response.data;
 

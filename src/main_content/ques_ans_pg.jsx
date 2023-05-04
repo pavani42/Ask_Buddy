@@ -32,7 +32,7 @@ const Main = () => {
     // console.log(val.target.innerText);
     localStorage.setItem('category', val.target.innerText);
     setCatDropDownTitle(val.target.innerText);
-    axios.get('http://localhost:8083/getSubCategoryList/' + val.target.innerText)
+    axios.get('http://localhost:9191/api/questions/getSubCategoryList/' + val.target.innerText)
       .then(response => {
         const dataArray = response.data;
         console.log(response);
@@ -70,7 +70,7 @@ const Main = () => {
     // else 
     const user = JSON.parse(localStorage.getItem('token'));
     console.log('Bearer ' + user);
-    const response = await axios("http://localhost:8083/postQuestion?category=" + localStorage.getItem('category') + "&sub_Category=" + localStorage.getItem('subcategory') + "&question= " + encodeURIComponent(formData.Question) + "&questionDescription=" + encodeURIComponent(formData.Detailed_Question), {
+    const response = await axios("http://localhost:9191/api/questions/postQuestion?category=" + localStorage.getItem('category') + "&sub_Category=" + localStorage.getItem('subcategory') + "&question= " + encodeURIComponent(formData.Question) + "&questionDescription=" + encodeURIComponent(formData.Detailed_Question), {
       method: "post",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -127,7 +127,7 @@ const Main = () => {
                   <option className="dropdown-item" value="other">Other</option>
                 </select> */}
                 <div style={{ display: "flex" }}>
-                  <Category functionChangeDetect={changeCategorySubcategory} />
+                  <Category functionChangeDetect={changeCategorySubcategory} header = {catDropDownTitle}/>
                   <SubCategory array={formData1} css={css} />
                 </div>
                 {/* <div style={{ display: "flex" }}>

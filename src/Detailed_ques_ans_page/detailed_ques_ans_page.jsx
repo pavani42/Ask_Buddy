@@ -14,15 +14,21 @@ const Main = () => {
   // const [b, setB] = useState([])
   // console.log(data);
   const [a, setA] = useState({
-   
-      question: {
-        question: "",
-        questionDescription: ''
-      },
-      
-        answerList: [{
-          description: ''
-        },]
+
+    question: {
+      question: "",
+      questionDescription: '',
+      user:{
+           username : ""
+      }
+    },
+
+    answerList: [{
+      description: '',
+      user:{
+        username : ""
+   }
+    },]
   });
   //////////////////////////FOR FETCHING & STORING API IN ARRAY////////////////////////////////// 
   const { slug } = useParams();
@@ -40,6 +46,7 @@ const Main = () => {
       setA(data.data.find((item) => item.question.question === slug));
     }
   }, [data]);
+  console.log(a)
   const user = JSON.parse(localStorage.getItem('token'));
   const submitHandle = async (event) => {
     event.preventDefault();
@@ -52,7 +59,7 @@ const Main = () => {
       try {
         // console.log(formData.Detailed_Answer + a.question.question)
         // answer = encodeURIComponent(formData.Detailed_Answer);
-        const response = await axios('http://localhost:8084/postAnswer?answer=' + encodeURIComponent(formData.Detailed_Answer) + '&question=' + encodeURIComponent(a.question.question), {
+        const response = await axios('http://localhost:9191/api/answers/postAnswer?answer=' + encodeURIComponent(formData.Detailed_Answer) + '&question=' + encodeURIComponent(a.question.question), {
           method: "post",
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -78,6 +85,7 @@ const Main = () => {
   }
   console.log(a.question.question)
   console.log(a.answerList.description)
+  console.log(a.question.user.username)
   return (
     <>
       <div className="detailed-div-1" style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '80px', minHeight: 'calc(100vh - 107px)' }}>
@@ -96,36 +104,39 @@ const Main = () => {
                 Voluptatibus nihil corrupti nemo dicta aspernatur quidem architecto cumque maiores perferendis, quae excepturi officiis ea vero consectetur aperiam quisquam molestias iste qui reiciendis ullam tempora, ipsa natus. Consectetur, accusamus architecto?
                 Dolores tempora odit, possimus rerum voluptatum repellat aliquid omnis quia fugiat quas voluptas, voluptate repudiandae! Esse nostrum ea commodi laboriosam sit voluptates architecto expedita. Cupiditate consectetur dolor voluptatum nobis molestias.
                 Temporibus odio aut minima voluptate illum facere hic excepturi dolor repellendus. Facere atque asperiores tempora quam laboriosam maiores dolorum aliquam, velit similique qui ab? Doloremque nulla sapiente accusantium nisi quo. */}
-                {/* <div>{a.question.quesDescription}</div> */}
+                <div>{a.question.quesDescription}</div>
                 <a data-toggle="modal" data-target="#exampleModal" className='replyButtonDQAP'>
                   <i className="fa fa-reply" aria-hidden="true"></i>
                   Reply</a>
-                <hr style={{ width: '100%' }} />
-              </div>              </div>
-            <div className="detailed-div-6-like-dislike" style={{ display: 'flex' }}>
-              <div className="detailed-div-5-like-dislike" style={{ marginRight: '25px' }}>
-                {/* <FontAwesomeIcon icon="fa-solid fa-triangle" /> */}
-                <p style={{ fontSize: '35px', margin: '0', color: 'grey' }}>&#9650;</p>
-                <p style={{ fontSize: '25px', margin: '0' }}>10</p>
-                <p style={{ fontSize: '35px', margin: '0', color: 'grey' }}>&#9660; </p>
-              </div>
-              <hr />
-              {/* <div></div> */}
-              {/* <AnswerCard Answer={a.answerList[0].description} /> */}
-              <div>
-                <h4 style={{ color: 'black' }}>Answer</h4>
-                {a.answerList.map((val) => {
-                  return (
-                    <><hr />
-                      <AnswerCard Answer={val.description} />
-                    </>
-                  )
-                })}
-              </div>
+                <div style={{ display: 'flex' }} title="Asked by"><img src="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg" alt="" width="35px" height="35px" draggable="false" /> <p style={{ color: '#b2b2b2', marginTop: '5px' }}>{a.question.user.username}</p></div>
+
+              {/* </div> */}
+              <hr style={{ width: '100%' }} />
+            </div>              </div>
+          <div className="detailed-div-6-like-dislike" style={{ display: 'flex' }}>
+            <div className="detailed-div-5-like-dislike" style={{ marginRight: '25px' }}>
+              {/* <FontAwesomeIcon icon="fa-solid fa-triangle" /> */}
+              <p style={{ fontSize: '35px', margin: '0', color: 'grey' }}>&#9650;</p>
+              <p style={{ fontSize: '25px', margin: '0' }}>10</p>
+              <p style={{ fontSize: '35px', margin: '0', color: 'grey' }}>&#9660; </p>
+            </div>
+            <hr />
+            {/* <div></div> */}
+            {/* <AnswerCard Answer={a.answerList[0].description} /> */}
+            <div>
+              <h4 style={{ color: 'black' }}>Answer</h4>
+              {a.answerList.map((val) => {
+                return (
+                  <><hr />
+                    <AnswerCard Answer={val.description} Username = {val.user.username}/>
+                  </>
+                )
+              })}
             </div>
           </div>
         </div>
       </div>
+    </div >
       <form onSubmit={submitHandle}>
         <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">

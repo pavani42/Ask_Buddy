@@ -17,7 +17,7 @@ const Main=()=> {
     try {
       // const response = await axios.post('/register', formData);
       console.log(formData);
-      const response = await axios("http://localhost:8086/register", {
+      const response = await axios("http://localhost:9191/api/users/register", {
         method: "post",
         headers: {
           "Access-Control-Allow-Origin": "*",

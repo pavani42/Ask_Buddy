@@ -1,0 +1,10 @@
+{
+  "name": "askbuddy",
+  "integration": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "integrations": {
+    "capacitor": {}
+  }
+}

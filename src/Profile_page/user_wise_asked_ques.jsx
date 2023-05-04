@@ -8,7 +8,7 @@ export const UserAskedQuestions = () => {
     const [data, setData] = useState([]);
     const fetchAPI = () => {
         const user = JSON.parse(localStorage.getItem('token'));
-        axios("http://localhost:9090/userQuestions", {
+        axios("http://localhost:9191/api/questions/questionByUser", {
             method: "get",
             headers: {
                 "Access-Control-Allow-Origin": "*",

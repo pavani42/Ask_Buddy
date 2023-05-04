@@ -11,7 +11,7 @@ const Main = (props) => {
 
     // const [data, setData] = useState([]);
     const fetchAPI = () => {
-        axios("http://localhost:9090/latestQuestion", {
+        axios("http://localhost:9191/api/questions/latestQuestions", {
             method: "get",
             headers: {
                 "Access-Control-Allow-Origin": "*",

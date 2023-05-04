@@ -22,7 +22,7 @@ const Main = () => {
 
   const onPuttingInput = (p) => {
     // console.log(p.target.value);
-    axios.get('http://localhost:8083/searchQuestionByKeyword/' + encodeURIComponent(p.target.value))
+    axios.get('http://localhost:9191/api/questions/searchQuestionByKeyword/' + encodeURIComponent(p.target.value))
       .then(response => {
         const dataArray = response.data;
         //  console.log(response);
