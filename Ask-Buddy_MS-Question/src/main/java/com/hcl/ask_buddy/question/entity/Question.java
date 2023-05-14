@@ -33,14 +33,10 @@ public class Question {
 	private User user;
 	@Column(name = "question")
 	private String question;
-	@Column(name = "que_description")
+	@Column(name = "que_description", columnDefinition = "varchar(5000)")
 	private String quesDescription;
 	@Column(name = "que_date")
 	private LocalDateTime date;
-//	@Column(name = "likes")
-//	private double noOfLikes;
-//	@Column(name = "dislikes")
-//	private double noOfDisLikes;
 	@ManyToOne
 	@JoinColumn(name = "cat_id", referencedColumnName = "cat_id")
 	private Category cat;

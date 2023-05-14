@@ -36,13 +36,9 @@ public class Answers {
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "sap_id")
 	private User user;
-	@Column(name = "ans_description")
+	@Column(name = "ans_description", columnDefinition = "varchar(5000)")
 	private String description;
 	@Column(name = "ans_date")
 	private LocalDateTime date;	
-//	@Column(name = "likes")
-//	private double noOfLikes;
-//	@Column(name = "dislikes")
-//	private double noOfDisLikes;
 	
 }
